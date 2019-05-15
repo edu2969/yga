@@ -1,0 +1,128 @@
+<template name="cuentaEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="col-md-12 col-lg-12">
+        <h2>{{nombreRol}} <small>{{#if cuentaSel._id}}(edición){{else}}(nuevo){{/if}}</small></h2>
+      </div>
+
+      {{>mensajes}}
+
+      <div class="row">
+        {{#if esAdmin}}
+        <ul class="nav nav-tabs" style="margin-bottom: 8px">
+          <li role="presentation" class="{{evalActive profile.cuentaEdit.tab 'tab-datos'}}">
+            <a data-toggle="tab" href="#tab-datos"><span class="glyphicon glyphicon-log-in"></span> Acceso</a>
+          </li>
+          <li role="presentation" class="{{evalActive profile.cuentaEdit.tab 'tab-appz'}}">
+            <a data-toggle="tab" href="#tab-appz">
+              <span class="glyphicon glyphicon-bishop"></span> Appz
+            </a>
+          </li>
+        </ul>
+        {{/if}}
+      </div>
+
+
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane {{evalActive profile.cuentaEdit.tab 'tab-datos'}}" id="tab-datos">
+          <div class="row">
+            <div class="col-xs-6">
+              <span>Nombre</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="Nombre" id="cuenta-name" value="{{cuentaSel.profile.name}}" required/>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>e-mail</span>
+              <div class="form-group">
+                <input class="form-control" name="email" placeholder="email@ejemplo.com" id="cuenta-email" value="{{cuentaSel.emails.[0].address}}" required/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span>RUT</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="RUT" id="cuenta-rut" value="{{cuentaSel.profile.rut}}" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span>Dirección</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="Depto." id="cuenta-direccion" value="{{cuentaSel.profile.direccion}}" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span>Teléfonos</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="Telefono" id="cuenta-telefono" value="{{cuentaSel.profile.telefono}}" />
+              </div>
+            </div>
+            
+            {{#if esTrabajador}}
+            <div class="col-xs-4">
+              <span>ID Biométrico</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="ID" id="cuenta-bioId" value="{{cuentaSel.profile.bioId}}" type="number"/>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <span>Prioridad</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="N°" id="cuenta-prioridad" value="{{cuentaSel.profile.prioridad}}" type="number"/>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="checkbox" style="display: inline;">                
+                <label style="margin-top: 20px;">
+                  <input id="checkbox-desvincular" type="checkbox" checked="{{#if cuentaSel.profile.desvinculado}}checked{{/if}}">
+                  <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span><span> Desvincular</span>
+                </label> 
+              </div>
+            </div> 
+            {{/if}}
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <span>Password</span>
+              <div class="form-group">
+                <input id="cuenta-password" class="form-control" name="password" type="password">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Re-Password</span>
+              <div class="form-group">
+                <input class="form-control" id="cuenta-repassword" name="password" type="password">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{#if esAdmin}}
+        <div role="tabpanel" class="tab-pane {{evalActive profile.cuentaEdit.tab 'tab-appz'}}" id="tab-appz">
+          <div class="row">
+            <div class="col-xs-12">
+              <span>Apps</span>
+              <div class="form-group">
+                <input class="form-control" placeholder="Appz" data-role="tagsinput" id="cuenta-appz" value="{{cuentaSel.profile.appz}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12" style="padding-top: 20px; text-align: center;">
+          <a href="#" class="btn btn-primary" id="btn-guardar">
+            <span class="glyphicon glyphicon-floppy-disk"></span> Guardar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

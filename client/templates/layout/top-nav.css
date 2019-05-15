@@ -1,0 +1,16 @@
+.contenedor-aliados {
+  width: 100%;
+  position: absolute;  
+  text-align: center;
+  height: auto;
+  overflow: visible;
+  margin-top: 2px;
+}
+
+.js-btn-aliados, js-btn-aliado {
+  padding: 8px;
+}
+
+.js-btn-aliados span {
+  margin-left: 6px;
+}

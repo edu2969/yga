@@ -1,0 +1,46 @@
+<template name="panelTrabajador">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="col-xs-12">
+        <h2><span class="glyphicon glyphicon-time"></span> Panel de Asistencias</h2>
+        <br/><span>Revisa su hoja de asistencia</span>
+      </div>
+      <div style="clear:both"></div>
+      <div class="chart-wrapper">
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4" style="margin-top: 8px">
+          <span>Periodo</span><br/>
+          <div class="form-group">
+            <div class="input-group date datetimepicker-component">
+              <input class="form-control" id="input-periodo"/>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4" style="margin-top: 8px">
+          <span>Colaborador</span><br/>
+          <div class="form-group">
+            <select id="select-trabajador" class="form-control">
+              {{#each trabajadores}}
+              <option id="{{id}}">{{nombre}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-4">
+          <button type="button" id="{{key}}" class="btn btn-info btn-view btn-block">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="font-size: 32px"></span><br/>Ver Planilla
+          </button>
+        </div>
+        <!--div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+          <button type="button" id="{{key}}" class="btn btn-info btn-print btn-block" style="width:100%; text-align:center">
+            <span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 32px"></span><br/>Imprimir
+          </button>
+        </div-->
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+</template>

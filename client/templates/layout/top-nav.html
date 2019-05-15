@@ -1,0 +1,32 @@
+<template name="topNav">
+  <nav class="js-title-nav" style="background-color: {{entorno.color}}">
+    <div class="nav-group">
+      <a href="#" class="js-menu nav-item">
+        <span class="glyphicon glyphicon-th" title="Show menu"
+              style="font-size: 24px; margin-top: -2px;"></span>
+      </a>
+    </div>
+    {{#if tieneVariosAliados}}
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" 
+              style="margin-top: 2px;"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{aliadoSesion}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        {{#each aliados}}
+          <li><a href="#">{{razon}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+      
+    {{#if navLastPage}}
+    <div class="icon-nav-top" style="float: right; margin-right: 7px; margin-top: 7px">
+      <a id="btn-nav-back">
+        <img src="/img/iconos/icono-cerrar-blanco.png">
+      </a>
+    </div>
+    {{/if}}
+  </nav>
+</template>

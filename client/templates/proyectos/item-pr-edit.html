@@ -1,0 +1,69 @@
+<template name="itemPREdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+
+      <div class="col-xs-12">
+        <h2>{{#if itemSeleccionado}}Edición de{{else}}Nuevo{{/if}} Item</h2>
+      </div>
+
+      <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+        <span>Cantidad</span>
+        <div class="form-group">
+          <input class="form-control" id="input-item-cantidad" value="{{itemSeleccionado.cantidad}}" tipo="numero"/>
+        </div>
+      </div>
+
+      <div class="col-xs-9 col-sm-4 col-md-4 col-lg-4">
+        <span>Categoría</span>
+        <div class="form-group">
+          <select class="form-control" id="select-item-tipo" tipo="texto">
+            {{#if categoriesCounter}} {{#each categories}}
+            <option id="{{value}}" {{selectedEval value itemSeleccionado.tipo}}>{{value}}</option>
+            {{/each}} {{/if}}
+          </select>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <span>Subcategoría</span>
+        <div class="form-group">
+          <select class="form-control" id="select-item-subtipo" tipo="texto-codificado">
+            {{#if subcategoriesCounter}} {{#each subcategories}}
+            <option id="{{value}}" {{selectedEval value itemSeleccionado.subtipo}}>{{clientCode}}-{{value}}</option>
+            {{/each}} {{/if}}
+          </select>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+        <span>Precio Venta</span>
+        <div class="form-group row">
+          <div class="col-xs-4">
+            <select class="form-control" id="select-item-moneda" tipo="moneda">
+              <option id="$" {{selectedEval '$' itemSeleccionado.moneda}}>CPL ($)</option>
+              <option id="UF $" {{selectedEval 'UF $' itemSeleccionado.moneda}}>UF (UF $)</option>
+              <option id="US $" {{selectedEval 'US $' itemSeleccionado.moneda}}>Dólar (US $)</option>
+              <option id="€" {{selectedEval '€' itemSeleccionado.moneda}}>Euro (€)</option>
+            </select>
+          </div>
+          <div class="col-xs-8">
+            <input class="form-control" id="input-item-valor" value="{{itemSeleccionado.valor}}"  placeholder="Valor" tipo="numero">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+        <span>Descripción Item</span>
+        <div class="left-inner-addon form-group">
+          <input class="form-control typeahead" id="input-item-nombre" 
+                 value="{{itemSeleccionado.codigo}}-{{itemSeleccionado.nombre}}" placeholder="Nombre" autocomplete="off" 
+                 spellcheck="off" data-source="codigosCotizacion"
+                 tipo="codigo"/>
+          <i class="glyphicon glyphicon-search"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

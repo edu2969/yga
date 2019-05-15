@@ -1,0 +1,47 @@
+<template name="categoriasEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-9">
+          <h2>Editor de Categorias</h2>
+        </div>
+        <div class="col-xs-3" style="text-align: right; margin-bottom: 7px;">
+          <button class="btn btn-primary" id="btn-agregar-categoria">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        {{#each categorias}}
+        <div class="col-md-12">
+          <div class="element-list-container contenedor-categoria" style="{{estiloListContainer}}">
+            <div class="texto">
+              <h5>{{#if padre}}<span class="glyphicon glyphicon-tag"></span> Subcategoría{{else}}<span class="glyphicon glyphicon-star"></span> Categoría{{/if}}</h5>
+              <h3><small>{{indice}}.  {{#if codigo}}[{{codigo}}]{{/if}}</small><br/><small></small><b>{{valor}}</b></h3>
+              <h4>{{subcodigo}}</h4>
+              {{#if padreId}}
+              <span>Padre: <strong>{{padre.valor}}</strong></span>
+              {{/if}}
+            </div>
+            <div class="botones-categoria">
+              <button id="{{_id}}" class="btn btn-primary btn-editar-categoria">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+              </button>
+              <button id="{{_id}}" class="btn btn-danger btn-eliminar-categoria">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {{else}}
+        <div class="wrapper-message">
+          <div class="title-message">
+            <h2>No hay elementos</h2>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

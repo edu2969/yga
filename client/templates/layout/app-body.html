@@ -1,0 +1,64 @@
+<template name="appBody">
+  <div id="container" class="{{menuOpen}} {{cordova}}">
+    
+    {{> modalEliminacionUsuario}}
+    {{> modalConfirmacionEliminacion}}
+    {{> modalSetPassword}}
+    {{> modalEditarCategoria}}
+    {{> modalEditValue}}
+    {{> modalEditarFechaEspecial}}
+    {{> modalConfirmarEstadoCotizacion}}
+    {{> modalConfirmarEstadoFactura}}
+    
+    <section id="menu">
+      {{#if currentUser}}
+      <div class="btns-group-vertical">
+        <div class="form-group" style="display:{{#if selectorEmpresasVisible}}block{{else}}none{{/if}}">
+          <select id="selector-empresa" class="form-control">
+            {{#each empresas}}
+            <option id="{{_id}}" {{selectedEval _id entorno._id }}>{{razon}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <a href="#" class="js-user-menu btn-secondary">
+          {{#if userMenuOpen}}
+            <span class="icon-arrow-up"></span>
+          {{else}}
+            <span class="icon-arrow-down"></span>
+          {{/if}}
+          {{emailLocalPart}}
+        </a>
+        {{#if userMenuOpen}}
+        <a class="js-logout btn-secondary">
+          <span class="glyphicon glyphicon-off"></span> Logout
+        </a>
+        {{/if}}
+      </div>
+      {{>navigation}} {{else}}
+      <div class="btns-group">
+        <a href="{{pathFor 'login'}}" class="btn-secondary">Ingresar</a>
+      </div>
+      {{/if}}
+
+    </section>
+
+    {{#unless connected}}
+    <div class="notifications">
+      <div class="notification">
+        <span class="icon-sync"></span>
+
+        <div class="meta">
+          <div class="title-notification">Intentando conectar</div>
+          <div class="description">Hay algunos problemas de conexión</div>
+        </div>
+      </div>
+    </div>
+    {{/unless}}
+
+    <div class="content-overlay"></div>
+
+    <div id="content-container">
+      {{> yield}}
+    </div>
+  </div>
+</template>

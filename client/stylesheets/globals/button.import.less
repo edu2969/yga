@@ -1,0 +1,51 @@
+[class^="btn-"],
+[class*=" btn-"] {
+  // fix-bug para apariencia de botones
+  padding-left: 8px;
+  font-size: 16px;
+
+  // Style
+  .transition( all 200ms ease-in );
+  color: @color-empty;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  text-decoration: none !important; //prevents global <a> styles from applying
+  vertical-align: middle;
+  word-spacing: normal;
+
+  &[class*="primary"] {
+    color: @color-empty;
+
+    &:hover { background-color: rgba(8, 0, 0, 0.25); }
+    &:active { box-shadow: rgba(0,0,0,.3) 0 1px 3px 0 inset; }
+  }
+
+  &[class*="secondary"] {
+    .transition( all 300ms ease-in );
+    box-shadow: lighten(#fff, 5%) 0 0 0 1px inset;
+    color: @color-empty;
+    border-radius: 4px;
+
+    &:hover{ color: @color-rare; }
+    &:active,
+    &.active {
+      box-shadow: lighten(#fff, 25%) 0 0 0 1px inset;
+    }
+  }
+
+  &[disabled] { opacity: .5; }
+}
+
+.btns-group {
+  .display(flex);
+  .flex-wrap(wrap);
+  width: 100%;
+
+  [class*="btn-"] {
+    .ellipsized;
+    .flex(1);
+
+    & + [class*="btn-"] { margin-left: -1px; }
+  }
+}

@@ -1,0 +1,107 @@
+<template name="prEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-7">
+          <h1> {{#if esEditada}}Edición de{{else}}Nuevo{{/if}} PR</h1>
+        </div>
+        <div class="col-xs-5" style="text-align: right">
+          <button type="button" id="{{_id}}" class="btn-lg btn-primary btn-block btn-pdf">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+            <br/>OC
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <span>Número</span>
+          <div class="form-group">
+            <input id="input-pr-numero" class="form-control" value="{{pr.numero}}" disabled="true" />
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <span>Fecha</span>
+          <div class="form-group" style="margin-bottom: 7px">
+            <div class="input-group date datetimepicker-component">
+              <input class="form-control" id="input-pr-fecha" value="{{formatDate pr.fecha 'DD/MM/YY'}}" tipo="fecha" />
+              <span class="input-group-addon">
+              <span class="glyphicon glyphicon-time"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <span>Cliente</span>
+          <div class="form-group">
+            <select class="form-control" id="select-pr-clienteId" tipo="select-id">
+              <option>Selecciones Cliente</option>
+              {{#each clientes}}
+              <option id="{{_id}}" {{selectedEval _id pr.clienteId}}>
+                {{profile.name}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <span>Entrega</span>
+          <div class="form-group">
+            <input id="input-pr-entrega" class="form-control" placeholder="Texto" tipo="texto" value="{{pr.entrega}}" />
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+          <span>Forma de Pago</span>
+          <div class="form-group">
+            <input id="input-pr-pago" class="form-control" placeholder="Texto" value="{{pr.pago}}" tipo="texto" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span>Nota</span>
+          <div class="form-group">
+            <textarea rows="3" class="form-control" id="input-pr-nota" tipo="texto">{{pr.nota}}</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h2 class="col-xs-8" style="clear: both">Listado de Items</h2>
+        <div class="col-xs-4" style="text-align: right">
+          <button class="btn btn-primary btn-agregar-item">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+        </div>
+      </div>
+      {{#each items}}
+      <div class="element-list-container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3><b>{{indice}}. {{nombre}}</b></h3>
+            <h4>{{cantidad}} x {{moneda}} {{maskPrice valor}}</h4>
+            <h4><b>Total: {{moneda}} {{maskPrice total}}</b></h4>
+          </div>
+          <div class="col-xs-12" style="text-align: right">
+            <button type="button" id="{{_id}}" class="btn btn-info btn-editar-item">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+            </button>
+            <button type="button" id="{{_id}}" class="btn btn-danger btn-eliminar-item">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+      {{else}}
+      <div class="wrapper-empty-list">
+        <h2>No hay items en el Pedido</h2>
+      </div>
+      {{/each}} 
+
+    </div>
+
+  </div>
+</template>

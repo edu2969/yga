@@ -1,0 +1,80 @@
+<template name="importarAsistencia">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable" style="color: #34495e">
+      <div class="col-md-6 col-lg-6">
+        <h4>Importación de Asistencias</h4>
+        <h5>Ingrese aquí su información excel.</h5>
+      </div>
+      <div class="col-md-6" style="text-align: right">
+        <h3 class="glyphicon glyphicon-question-sign" style="color: mediumseagreen"></h3> Ayuda
+      <div class="tooltip-ayuda">
+        <ul class="ayuda">
+          <li>
+            <span>Ingrese a la aplicacion de asistencia</span>
+            <img src="/img/aliados/simen/ayuda00.png">
+          </li>
+          <li>
+            <span>Conectese a la máquina</span>
+            <img src="/img/aliados/simen/ayuda01.png" width="100%">
+          </li>
+          <li>
+            <span>Descargue los eventos</span>
+            <img src="/img/aliados/simen/ayuda02.png">
+          </li>
+          <li>
+            <span>Ingrese a AC Reg</span>
+            <img src="/img/aliados/simen/ayuda03.png">
+          </li>
+          <li>
+            <span>Seleccione a <b>todos</b> los trabajadores, el <b>rango de fechas</b> y presione <b>Buscar</b>.</span>
+            <img src="/img/aliados/simen/ayuda04.png" width="100%">
+          </li>
+          <li>
+            <span>Presione exportar y checkee solo N° y fecha</span>
+            <img src="/img/aliados/simen/ayuda05.png" width="100%">
+          </li>
+          <li>
+            <span>Seleccione donde guardará el excel</span>
+            <img src="/img/aliados/simen/ayuda06.png" width="100%">
+          </li>
+          <li>
+            <span>Abra el archivo que exportó</span>
+          </li>
+          <li>
+            <span>Seleccione las dos columnas dejando presionado las columnas A y B</span>
+          </li>
+          <li>
+            <span>Copie los datos presionando <b>CTRL + c</b></span>
+          </li>
+          <li>
+            <span>Pegue en el recuadro aquí presente, colocando el cursor allí y presionando <b>CTRL + v</b></span>
+          </li>
+          <li>
+            <span>Presione <b>IMPORTAR</b></span>
+          </li>
+        </ul>
+      </div>
+
+      </div>
+      <div class="col-md-12 col-lg-12" style="margin-top: 8px">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-list"></span>
+          <textarea id="text-2-import"
+                    class="form-control" cols="0" rows="5"
+                    style="width : 100%;resize: none;"></textarea>
+        </div>
+      </div>
+
+      <div style="clear:both; margin-bottom: 10px;"></div>
+
+      {{>mensajes}}
+
+      <div class="col-xs-12" style="padding-top: 20px;">
+        <a href="#" class="btn btn-primary btn-block" id="btn-import">
+          <span class="glyphicon glyphicon-import"></span> Importar
+        </a>
+      </div>
+    </div>
+  </div>
+</template>

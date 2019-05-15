@@ -1,0 +1,60 @@
+<template name="jornadas">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2><span class="glyphicon glyphicon-calendar"></span> Mantenedor de Jornadas</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8" style="margin-top: 16px">
+          <span>Para el Año</span>
+          <div class="form-group" style="margin-bottom: 7px; max-width: 240px">
+            <div class="input-group date datetimepicker-component-year">
+              <input class="form-control" id="input-periodo" />
+              <span class="input-group-addon">
+              <span class="glyphicon glyphicon-time"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4" style="text-align: right">
+          <button class="btn btn-primary btn-agregar-jornada">
+            <h2 class="glyphicon glyphicon-plus"></h2><br/>
+            <span>Nueva jornada</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div style="clear:both; margin-top: 7px;"></div>
+        <div class="tabla-fechas">
+          <div class="tabla-fechas-header">
+            <div class="row">
+              <div class="col-xs-12">
+                <span>Fecha - Tipo Jornada</span>
+              </div>
+            </div>
+          </div>
+          {{#each definiciones}}
+          <div class="row">
+            <div class="col-xs-12" style="height: 48px; line-height: 48px; float: left">
+              <div style="margin: 4px; float: left">
+                <button id="{{_id}}" class="btn btn-info btn-eliminar-jornada glyphicon glyphicon-remove"></button>
+                <button id="{{_id}}" class="btn btn-info btn-editar-jornada glyphicon glyphicon-pencil"></button>
+              </div>
+              <div style="margin: 8px; float: left">
+                <b>{{formatDate fecha 'ddd DD/MMM'}}</b> [{{glosa}}]
+              </div>
+            </div>
+          </div>
+          {{else}}
+          <div class="wrapper-empty-list">
+            <h1>No hay jornadas aún</h1>
+          </div>
+          {{/each}}
+        </div>
+    </div>
+  </div>
+</template>

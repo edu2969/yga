@@ -1,0 +1,74 @@
+@menu-width: 270px;
+@column: 5.55555%;
+
+body {
+  .position(absolute, 0, 0, 0, 0);
+  background-color: #800000;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#container {
+  .position(absolute, 0, 0, 0, 0);
+
+  @media screen and (min-width: 60em) {
+  }
+
+  @media screen and (min-width: 80em) {
+  }
+
+  // Hide anything offscreen
+  overflow: hidden;
+}
+
+#menu {
+  .position(absolute, 0, 0, 0, 0, @menu-width);
+}
+
+#content-container {
+  .position(absolute, 0, 0, 0, 0);
+  .transition(all 200ms ease-out);
+  .transform(translate3d(0, 0, 0));
+  background: white;
+  opacity: 1;
+
+  @media screen and (min-width: 40em) {
+    left: @menu-width;
+  }
+
+  .content-scrollable {
+    .position(absolute, 0, 0, 0, 0);
+    .transform(translate3d(0, 0, 0));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+  }
+
+  // Toggle menu on mobile
+  .menu-open & {
+    .transform(translate3d(@menu-width, 0, 0));
+    opacity: .85;
+    left: 0;
+
+    @media screen and (min-width: 40em) {
+      // Show menu on desktop, negate .menu-open
+      .transform(translate3d(0, 0, 0)); //reset transform and use position properties instead
+      opacity: 1;
+      left: @menu-width;
+    }
+  }
+}
+
+// Transparent screen to prevent interactions on content when menu is open
+.content-overlay {
+  .position(absolute, 0, 0, 0, 0);
+  cursor: pointer;
+
+  .menu-open & {
+    .transform(translate3d(@menu-width, 0, 0));
+    z-index: 1;
+  }
+
+  // Hide overlay on desktop
+  @media screen and (min-width: 40em) { display: none; }
+}

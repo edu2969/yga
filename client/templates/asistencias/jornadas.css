@@ -1,0 +1,15 @@
+.tabla-fechas {
+  border-radius: 8px;
+  background: #ecf0f1;
+  padding: 4px;
+}
+
+.tabla-fechas-header {
+  font-weight: bold;
+  font-size: 16px;
+  height: 32px;
+}
+
+.label-add-jornada {
+  cursor: pointer;
+}

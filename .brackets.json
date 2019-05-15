@@ -1,0 +1,10 @@
+{
+    "dimitrk.exclude-indexing-filetree.excludeList": [
+        ".git(?!ignore)",
+        "dist",
+        "node_modules", 
+        ".meteor",
+        "packages",
+        "uploads"
+    ]
+}

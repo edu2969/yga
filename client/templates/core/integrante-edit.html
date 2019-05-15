@@ -1,0 +1,39 @@
+<template name="integranteEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{#if integrante}}<span class="glyphicon glyphicon-pencil"></span> Edición de{{else}}* Nuevo{{/if}} Integrante</h2>
+          <h3>{{empresa.razon}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>Usuario</span>
+          <select class="form-control" id="select-usuarioId" tipo="select-id">
+            {{#each usuarios}}
+            <option id="{{_id}}" {{selectedEval _id integrante.usuarioId}}>
+              {{profile.name}}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="col-xs-6">
+          <span>Rol</span>
+          <div class="form-group">
+            <input class="form-control" tipo="texto" id="input-rol" value="{{integrante.rol}}">
+          </div>
+        </div>       
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span>Nota</span>
+          <div class="form-group">
+            <textarea rows="3" class="form-control" id="input-nota" tipo="texto">{{integrante.nota}}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

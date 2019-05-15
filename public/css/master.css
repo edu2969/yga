@@ -1,0 +1,49 @@
+div#content-wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 1024px;
+  margin: auto;
+}
+html.touch div#content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+.scrollContainer {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%
+}
+.scrollContent {
+    position: relative;
+    /*height: 100%;*/
+}
+html.touch .contacto {
+  top: -20px;
+}
+html.touch .contacto:hover {
+  top: -20px;
+}
+
+/*START
+html.touch body {
+
+}
+html.touch #info #hatcontainer {
+    margin-bottom: 260px;
+    height: 300px;
+    width: 240px;
+}
+html.touch #info #hatcontainer .hat {
+    left: 90px;
+}
+html.touch #info #hatcontainer #bunny {
+    left: 110px;
+}
+html.touch #info #hatcontainer #speechbubble {
+    left: -20px;
+    top: 35px;
+}
+html.touch #info ul.nexttohat {
+    padding-left: 240px;
+}*/

@@ -1,0 +1,70 @@
+#chart-container {
+  height: 320px;
+}
+
+.panel-container {
+  background-color: rgba(189, 195, 199,.15);
+  border-radius: 7px;
+  margin-top: 7px;
+  padding: 0px;
+}
+
+.chart-wrapper {
+  background-color: rgba(220,170,4, 0.2);
+  border: 3px #fff solid;
+  border-radius: 10px;
+  margin-top: 7px;
+  padding: 16px;
+}
+
+.chart-wrapper h2 {
+  width: 100%;
+  padding: 7px 0 14px 0;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: #E9D460;
+  stroke-width: 4px;
+}
+
+.bar1 {
+  fill: #E9D460;
+}
+.bar2 {
+  fill: rgba(192, 57, 43,1.0);
+}
+.tabla-resumen tr th {
+  font-weight: bold;
+  height: 200px;
+}
+.tabla-resumen td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  background-color: white;
+  color: black;
+}
+th.rotate {
+  /* Something you can count on */
+  height: 140px;
+  white-space: nowrap;
+}
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    translate(12px, 76px)
+    /* 45 is really 360 - 45 */
+    rotate(285deg);
+  width: 40px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+}

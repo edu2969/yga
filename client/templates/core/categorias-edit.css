@@ -1,0 +1,18 @@
+.contenedor-categoria {
+  position: relative;
+  height: 111px;
+}
+
+.contenedor-categoria .texto {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.contenedor-categoria .botones-categoria {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.botones-categoria button {
+  margin: 2px;
+}

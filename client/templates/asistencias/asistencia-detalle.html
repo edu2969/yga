@@ -1,0 +1,191 @@
+<template name="asistenciaDetalle">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div id="calendar-section" class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12 col-sm-7"
+             style="margin-top: 8px; margin-bottom: 8px;">
+          <h2>{{period}}</h2>
+          <span>Planilla de Asistencia</span>
+        </div>
+        {{#if imprimible }}
+        <div class="col-xs-12 col-sm-5" style="text-align: right">
+          <button id="btn-print" class="btn btn-info" style="width: 149px">
+            <span class="glyphicon glyphicon-print" style="font-size: 32px"></span>
+            <br/>Imprimir<br/>reporte
+          </button>
+        </div>
+        {{/if}}
+      </div>
+      {{#unless isColaborator}}
+      <div class="row" style="margin:8px 0px 8px 0px;">
+        <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
+          <h6><b>Colaborador</b></h6>
+          <h6><b>Inasistencias</b></h6>
+          <h6><b>Retrasos</b></h6>
+          <h6><b>Días Vacaciones</b></h6>
+          <h6><b>HH.Norm</b></h6>
+          <h6><b>HH.50%</b></h6>
+          <h6><b>HH.100%</b></h6>
+        </div>
+        <div class="col-xs-7 col-sm-8 col-md-3 col-lg-4">
+          <h6>: {{ user.profile.name }}</h6>
+          <h6>: {{ stats.absentDays }}</h6>
+          <h6>: {{ stats.lateDays }}</h6>
+          <h6>: {{ stats.vacaciones }}</h6>
+          <h6>: {{ stats.hhNormal}} ({{hours2Days stats.hhNormal}})</h6>
+          <h6>: {{ stats.hh50 }} ({{hours2Days stats.hh50}})</h6>
+          <h6>: {{ stats.hh100 }} ({{hours2Days stats.hh100}})</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+          <h4>Obs.del mes</h4>
+          <div class="form-group">
+            {{#if esGerente}}
+            <textarea rows="3" class="form-control" id="textarea-observacion" tipo="texto">{{observacionMes}}</textarea>
+            {{else}}
+            <textarea rows="3" class="form-control" id="textarea-observacion" tipo="texto" readonly>{{observacionMes}}</textarea>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      {{>mensajes}}
+
+      {{/unless}}
+      <div class="row">
+        <div class="col-md-4 col-lg-4 col-xs-4">
+          <div style="border-radius: 6px; border: 8px solid rgba(46,204,113, 0.2); text-align: center; background-color: rgba(46,204,113, 0.2)">
+            <span><b>HH Nor</b></span>
+            <h3>{{stats.total.hhNormal}}</h3>
+            <span>({{hours2Days stats.total.hhNormal}})</span>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xs-4">
+          <div style="border-radius: 6px; border: 8px solid rgba(241,196,15, 0.2); text-align: center; background-color: rgba(241,196,15, 0.2)">
+            <span><b>HH 50%</b></span>
+            <h3>{{stats.total.hh50}}</h3>
+            <span>({{hours2Days stats.total.hh50}})</span>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xs-4">
+          <div style="border-radius: 6px; border: 8px solid rgba(231,76,60, 0.2); text-align: center; background-color: rgba(231,76,60, 0.2)">
+            <span><b>HH 100%</b></span>
+            <h3>{{stats.total.hh100}}</h3>
+            <span>({{hours2Days stats.total.hh100}})</span>
+          </div>
+        </div>
+      </div>
+      <table width="100%" style="margin-top: 7px;">
+        <tr>
+          <th width="37">
+            <div class="detail-calendar-resume">
+              <p>Nº</p>
+            </div>
+          </th>
+          <th>
+            <div class="detail-calendar-resume">
+              <p>Marcaciones</p>
+            </div>
+          </th>
+          <th width="50">
+            <div class="detail-calendar-resume">
+              <p>HH.Ext</p>
+            </div>
+          </th>
+        </tr>
+
+        {{#each calendars}}
+        <tr>
+          <td>
+            <div id="{{day}}-{{month}}-{{year}}" class="detail-calendar-day{{#if isHolyDay}} holyday{{/if}}{{#if isMediaJornada}} media-jornada{{/if}}">
+              <p style="{{#if isWeekend}}color:red{{/if}}">
+                <b>{{dayName}}<br/>{{day}}</b>
+                {{#if nota}}
+                <div style="position: relative; right: 0px; top: -34px">
+                  <img src="/img/aliados/simen/pin.png" width="32"/>
+                </div>
+                {{/if}}
+              </p>              
+            </div>
+          </td>
+          {{#if isColaborator}}
+          <td>
+            <div class="detail-calendar-marcations">
+              {{#each marcasView}}
+              <span class="etiqueta-marcacion label label-{{style}} btn-ver-marcacion"
+                    style="{{#if isLate}}color:#d35400{{/if}}">
+                <span class="glyphicon glyphicon-{{glyphicon}}"></span> {{time}}
+                {{#if tieneNota}}
+                <div class="marco-pin-asistencia" style="z-index: 999">
+                  <img src="/img/aliados/simen/pin.png" width="20">
+                </div>              
+                {{/if}}
+              </span>               
+              {{/each}}
+            </div>
+          </td>
+          {{else}}
+          <td>
+            <div class="detail-calendar-marcations {{#if vacacion}}en-vacaciones{{/if}}">
+              {{#if esGerente}}
+                {{#unless vacacion}}
+                <span id="{{assistId}}-{{day}}-X" class="label label-info btn-edit-marcation">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </span>
+                {{/unless}}
+              {{/if}}
+              {{#each marcasView}}
+              <span id="{{assistId}}-{{day}}-{{index}}"
+                    class="etiqueta-marcacion label label-{{style}} btn-edit-marcation"
+                    style="{{#if isLate}}color:#d35400{{/if}}">
+                <span class="glyphicon glyphicon-{{glyphicon}}"></span> {{time}}
+                {{#if tieneNota}}
+                <div class="marco-pin-asistencia">
+                  <img src="/img/aliados/simen/pin.png" width="20">
+                </div>              
+                {{/if}}
+              </span>
+              {{/each}}
+              {{#if esGerente}}
+                {{#if vacacionable}}              
+                <span id="{{day}}-{{month}}-{{year}}" class="label label-default btn-vacacion">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span> ¿Es día de vacación?
+                </span>
+                {{else}}
+                  {{#if vacacion}}
+                    <span id="{{day}}-{{month}}-{{year}}" class="label label-warning btn-vacacion"> 
+                      <span class="glyphicon glyphicon-remove"></span> Quitar como día vacación
+                    </span>
+                  {{/if}}
+                {{/if}}
+              {{/if}}
+            </div>
+          </td>
+          {{/if}}
+          <td>
+            <div class="detail-calendar-resumen-horas">
+              <p style="color:{{#if hhExt50}}#f1c40f{{else}}
+                 {{#if hhExt100}}#c0392b{{else}}#95a5a6{{/if}}{{/if}}">
+                <b>{{#if hhNormal}}{{hhNormal}}{{else}}
+                  {{#if hhExt50}}{{hhExt50}}{{else}}
+                    {{#if hhExt100}}{{hhExt100}}{{else}}--{{/if}}
+                  {{/if}}
+                {{/if}}</b>
+              </p>
+              <p style="color:{{#if hhExt50}}#f1c40f{{else}}
+                 {{#if hhExt100}}#c0392b{{else}}#95a5a6{{/if}}{{/if}}">
+                <b>{{#if hhNormal}}(Norm){{else}}
+                  {{#if hhExt50}}(50%){{else}}
+                    {{#if hhExt100}}(100%){{else}}--{{/if}}
+                  {{/if}}
+                {{/if}}</b>
+              </p>
+            </div>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</template>

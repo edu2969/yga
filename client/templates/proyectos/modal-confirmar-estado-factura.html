@@ -1,0 +1,57 @@
+<template name="modalConfirmarEstadoFactura">
+  <div class="modal fade" id="modal-confirmar-estado-factura" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          {{#if params.soloComentar}}
+          <h4>Comentar <small>movimientos contables</small></h4>
+          {{else}}
+          <h4>Confirmación <small>Cambio de estado</small></h4>
+          {{/if}}
+        </div>
+        <div class="modal-body">
+          {{#unless params.soloComentar}}
+          <div class="row">            
+            <div class="col-xs-12">
+              <span>Seguro desea cambiar al estado</span>
+              <h2>{{params.categoria.glosa}}</h2>
+              <span>SIGNIFICA: {{params.categoria.descripcion}}</span>
+            </div>
+          </div>
+          {{/unless}}
+          {{#if facturada}}
+          <div class="row">
+            <div class="col-xs-12">
+              <label>N° Boleta SII</label>
+              <div class="form-group">
+                <input id="input-nsii" class="form-control" value="{{params.nsii}}"/>
+              </div>              
+            </div>
+          </div>
+          {{/if}}
+          {{#if params.pagos}}          
+          <div class="row">
+            <div class="col-xs-12">
+              <label>Registro de pagos</label>
+              <div class="form-group">
+                <textarea id="textarea-pagos" class="form-control" rows="3" value="{{params.pagos}}"></textarea>
+              </div>              
+            </div>
+          </div>
+          {{/if}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btn-confirm">
+            <span class="glyphicon glyphicon-ok"></span>
+            Si
+          </button>
+          <button type="button" class="btn btn-danger" id="btn-cancel">
+            <span class="glyphicon glyphicon-remove"></span>
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

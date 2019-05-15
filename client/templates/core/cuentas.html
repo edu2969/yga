@@ -1,0 +1,64 @@
+<template name="cuentas">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable">
+      <div class="row" style="margin-bottom: 7px">
+        <h2 class="col-xs-8">Cuentas <small>{{rolSeleccionado}}</small></h2>
+        <div class="col-xs-4" style="text-align:right">
+          <button id="btn-add-account" class="btn btn-success">
+            <span class="glyphicon glyphicon-user">+</span> Add
+          </button>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 8px">
+        <div class="col-xs-12">
+          <ul class="nav nav-tabs">
+            {{#if isAdmin}}
+            <li id="tab-admin" role="presentation" class="{{#if adminSel}}active{{/if}}"><a href="#">
+              <span class="glyphicon glyphicon-music"></span></a>
+            </li>
+            <li id="tab-rol2" role="presentation" class="tab-rol {{#if rol2Sel}}active{{/if}}"><a href="#">Gerente</a>
+            </li>
+            <li id="tab-rol3" role="presentation" class="tab-rol {{#if rol3Sel}}active{{/if}}"><a href="#">Asesores</a>
+            </li>
+            <li id="tab-rol4" role="presentation" class="tab-rol {{#if rol4Sel}}active{{/if}}"><a href="#">Socios</a>
+            </li>
+            <li id="tab-rol5" role="presentation" class="tab-rol {{#if rol5Sel}}active{{/if}}"><a href="#">Vendedores</a>
+            </li>
+            {{/if}}
+            {{#if tieneTrabajadores}}
+            <li id="tab-rol6" role="presentation" class="tab-rol {{#if rol6Sel}}active{{/if}}"><a href="#">Trabajadores</a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+      {{#each accounts}}
+      <div class="element-list-container {{#if profile.desvinculado}} devinculado{{/if}}" style="{{estiloListContainer}}">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>
+              {{index}}.<b>{{profile.name}}</b>{{#if profile.bioId}}<small> BioId: {{profile.bioId}}</small>{{/if}}
+            </h4>
+            <span>{{emails.[0].address}}</span>
+          </div>
+          <div class="col-xs-12" style="text-align: right">
+            <button type="button" id="{{_id}}" class="btn btn-info btn-edit">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+            </button>
+            <button type="button" id="{{_id}}" class="btn btn-danger btn-delete">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+      {{else}}
+      <div class="wrapper-message">
+        <div class="title-message">
+          <h2>Sin usuarios para este Rol</h2>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

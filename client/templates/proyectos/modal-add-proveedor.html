@@ -1,0 +1,92 @@
+<template name="modalAddProveedor">
+  <div class="modal fade" id="modal-add-proveedor" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4>Nuevo proveedor</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <span>RUT</span>
+              <div class="form-group">
+                <input id="input-proveedor-rut" class="form-control" placeholder="RUT" value="{{proveedor.rut}}" />
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Nombre</span>
+              <div class="form-group">
+                <input id="input-proveedor-nombre" class="form-control" placeholder="Nombre" value="{{proveedor.nombre}}" />
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Teléfono</span>
+              <div class="form-group">
+                <input id="input-proveedor-telefono" class="form-control" placeholder="Teléfono" value="{{proveedor.nombre}}" />
+              </div>
+            </div>            <div class="col-xs-6">
+              <span>Email</span>
+              <div class="form-group">
+                <input id="input-proveedor-email" class="form-control" placeholder="e-mail" value="{{proveedor.email}}" />
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <span>Dirección</span>
+              <div class="form-group">
+                <input id="input-proveedor-direccion" class="form-control" placeholder="Dirección" value="{{proveedor.direccion}}" />
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Región</span>
+              <div class="form-group">
+                <div class="form-group">
+                  <select class="form-control" id="select-region">
+                    <option value="0" selected="selected">Seleccione Región</option>
+                    <option value="1">I Tarapaca</option>
+                    <option value="2">II Antofagasta</option>
+                    <option value="3">III Atacama</option>
+                    <option value="4">IV Coquimbo</option>
+                    <option value="5">V Valparaiso</option>
+                    <option value="6">VI O'Higgins</option>
+                    <option value="7">VII Maule</option>
+                    <option value="8">VIII Bio - Bio</option>
+                    <option value="9">IX Araucania</option>
+                    <option value="10">X Los Lagos</option>
+                    <option value="11">XI Aisen</option>
+                    <option value="12">XII Magallanes Y Antartica</option>
+                    <option value="13">M Metropolitana</option>
+                    <option value="14">XIV Los Rios</option>
+                    <option value="15">XV Arica y Parinacota</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Ciudad</span>
+              <div class="form-group">
+                <div class="form-group">
+                  <select class="form-control" id="select-comuna">
+                    {{#each ciudades}}
+                    <option id="{{indice}}" {{selectedEval proveedor.ciudad indice}}>{{nombre}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btn-cancel">
+            <span class="glyphicon glyphicon-remove"></span>
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-success" id="btn-confirm">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

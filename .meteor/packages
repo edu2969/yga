@@ -1,0 +1,20 @@
+standard-app-packages
+less
+# email
+accounts-password
+twbs:bootstrap
+ajduke:bootstrap-tagsinput
+rzymek:moment-locale-es
+tsega:bootstrap3-datetimepicker
+d3js:d3
+kosst:css-star-rating
+momentjs:moment
+multiply:iron-router-progress
+meteorhacks:search-source
+sergeyt:typeahead
+reywood:publish-composite
+particle4dev:upload-avatar
+risul:bootstrap-colorpicker
+dynamic-import
+coffeescript
+ecmascript

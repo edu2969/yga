@@ -1,0 +1,29 @@
+<template name="holdingEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{#if empresa}}Edición de{{else}}Nuevo{{/if}} Holding</h2>
+          <h3>{{empresa.razon}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+        <span>Empresas</span>
+          <div class="left-inner-addon">
+            <i class="glyphicon glyphicon-tree-deciduous"></i>
+            <input id="input-empresaId" 
+                  class="typeahead form-control" 
+                  placeholder="Empresa"
+                  autocomplete="off" spellcheck="off"
+                  data-source="empresas"
+                  data-select="holdingSeleccionado"
+                  tipo="session-id"
+                  value="{{holding.subempresa.nombre}}"/>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

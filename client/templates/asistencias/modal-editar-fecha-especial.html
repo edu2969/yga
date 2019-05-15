@@ -1,0 +1,43 @@
+<template name="modalEditarFechaEspecial">
+  <div class="modal fade" id="modal-editar-fecha-especial" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4>{{#if isEditing}}Edición{{else}}Creación{{/if}} de Fecha</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <span>Fecha</span>
+              <div class="input-group date datetimepicker-component">
+                <input class="form-control" id="input-fecha" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-5">
+              <span>Tipo de jornada</span>
+              <div class="form-group">
+                <select class="form-control" id="select-tipo-jornada">
+                  <option id="1">Feriado Legal</option>
+                  <option id="2">Compensado Vacaciones</option>
+                  <option id="3">Media Jornada</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btn-confirm">
+            <span class="glyphicon glyphicon-ok"></span> Aceptar
+          </button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

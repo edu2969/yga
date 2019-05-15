@@ -1,0 +1,82 @@
+.detail-calendar-day {
+  background-color: #ecf0f1;
+  height: 58px;
+  text-align: left;
+  cursor: pointer;
+  padding-left: 5px;
+  width: 37px;
+}
+
+.detail-calendar-day:hover {
+  background-color: #95a5a6;
+}
+
+.detail-calendar-day .note {
+  position: absolute;
+}
+
+.detail-calendar-marcations {
+  background-color: #ecf0f1;
+  padding: 0px 5px 0px 5px;
+  height: auto;
+  min-height: 58px;
+  line-height: 28px;
+}
+
+.detail-calendar-marcations span {
+  font-size: 16px;
+}
+
+.detail-calendar-resume {
+  padding: 5px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  height: 32px;
+  text-align: center;
+}
+
+.detail-calendar-resumen-horas {
+  background-color: #ecf0f1;
+  height: 58px;
+  text-align: center;
+  padding: 0px 5px 0px 5px;
+  width: 66px;
+}
+
+.etiqueta-marcacion {
+  position: absolute;
+}
+
+.marco-pin-asistencia {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+}
+
+.holyday {
+  border: 2px #f39c12 solid;
+  color: white;
+  background-color: #f39c12;
+}
+
+.media-jornada {
+  border: 2px #27ae60 solid;
+  color: white;
+  background-color: #27ae60;
+}
+
+table tr td, table tr th {
+  padding: 2px;
+}
+
+.btn-add-marcation, .btn-edit-marcation, .btn-vacacion {
+  cursor: pointer;
+}
+
+.btn-ver-marcacion {
+  cursor: crosshair;
+}
+
+.en-vacaciones {
+  background: repeating-linear-gradient(-45deg, grey, grey 5px, white 5px, white 10px);
+}

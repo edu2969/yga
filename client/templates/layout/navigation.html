@@ -1,0 +1,11 @@
+<template name="navigation">
+  <div class="list-navigation">
+
+    {{#each appz}}
+      <a href="{{pathFor app}}" class="btn-secondary" style="text-align:left;">
+        <span class="glyphicon glyphicon-{{icon}}"></span> {{etiqueta}}
+      </a>
+    {{/each}}
+    
+  </div>
+</template>

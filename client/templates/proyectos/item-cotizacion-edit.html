@@ -1,0 +1,85 @@
+<template name="itemCotizacionEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{#if item._id}}<span class="glyphicon glyphicon-pencil"></span> Edición de{{else}}* Nuevo{{/if}} Item</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-9">
+          <span>Categoría</span>
+          <div class="form-group">
+            <select class="form-control" id="select-item-categoriaId" tipo="select-id">
+              {{#each categorias}}
+              <option id="{{_id}}" {{selectedEval _id item.categoriaId}}>{{valor}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+
+        <div class="col-xs-3">          
+          <button id="btn-edit-categorias" class="btn btn-primary" style="margin-top: 14px;">
+            ...
+          </button>
+        </div>
+        
+      </div>
+
+      <div class="row">
+
+        <div class="col-xs-9">
+          <span>Subcategoría</span>
+          <div class="form-group">
+            <select class="form-control" id="select-item-subcategoriaId" tipo="select-id">              
+              {{#each subcategorias}}
+              <option id="{{_id}}" {{selectedEval _id item.subcategoriaId}}>{{valor}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        
+        <div class="col-xs-3">          
+          <button id="btn-edit-subcategorias" class="btn btn-primary" style="margin-top: 14px;">
+            ...
+          </button>
+        </div>
+      </div>
+      
+
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
+          <span>Descripción Item</span>
+          <div class="form-group">
+            <textarea rows="3" class="form-control" id="input-item-descripcion" tipo="texto">{{item.descripcion}}</textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <span>Cantidad</span>
+          <div class="form-group">
+            <input class="form-control" id="input-item-cantidad" value="{{item.cantidad}}" tipo="numero" />
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <span>Precio Unitario</span>
+          <div class="form-group">
+            <input class="form-control" id="input-item-valor" value="{{maskPrice item.valor '$'}}" placeholder="Valor" tipo="precio">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <span>Total</span>
+          <h3>{{maskPrice total '$'}}</h3>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</template>

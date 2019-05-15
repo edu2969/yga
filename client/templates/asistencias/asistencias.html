@@ -1,0 +1,141 @@
+<template name="asistencias">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2><span class="glyphicon glyphicon-book"></span> Libro de Asistencias</h2>
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3><span class="glyphicon glyphicon-wrench"></span> Operaciones</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <h4>Periodo</h4>
+            <div class="form-group">
+              <div id="datepicker-periodo" class="input-group date datetimepicker-component">
+                <input class="form-control" id="input-periodo" />
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <h4>Colaborador</h4>
+            <div class="form-group">
+              <select class="form-control" id="filter-rrhh-id" style="width: 100%">
+                {{#if esGerente}}
+                <option id="-1">--- TODOS ---</option>
+                {{/if}}
+                {{#each colaborators}}
+                <option id="{{profile.bioId}}">{{profile.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4">
+            <button type="button" id="{{key}}" class="btn btn-info btn-view btn-block" style="width:100%; text-align:center">
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="font-size: 36px"></span>
+              <br/>Ver
+              <br/>planilla
+            </button>
+          </div>
+          {{#if puedeImportar}}
+          <div class="col-xs-4 col-sm-4">
+            <button id="btn-reporte" class="btn btn-info btn-block" style="width:100%; text-align:center">
+              <span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 36px"></span>
+              <br/>Imprimir
+              <br/>reporte
+            </button>
+          </div>
+          <div class="col-xs-4 col-sm-4">
+            <button type="button" id="{{key}}" class="btn btn-info btn-import btn-block" style="width:100%; text-align:center">
+              <span class="glyphicon glyphicon-import" aria-hidden="true" style="font-size: 36px"></span>
+              <br/>Importar
+              <br/>Reloj Bio.
+            </button>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3><span class="glyphicon glyphicon-th-list"></span> Tabla resúmen</h3>
+            <h2>{{periodo}}</h2>
+            <table class="tabla-resumen">
+              <tr>
+                <th></th>
+                {{#each colaborators}}
+                <th class="rotate">
+                  <div><span>{{profile.name}}</span></div>
+                </th>
+                {{/each}}
+              </tr>
+              <tr>
+                <td style="background-color: rgba(38, 154, 188, 0.2)">Norm</td>
+                {{#each colaborators}}
+                <td>{{hhNormal}}</td>
+                {{/each}}
+              </tr>
+              <tr>
+                <td style="background-color: rgba(241,196,15, 0.2)">50%</td>
+                {{#each colaborators}}
+                <td>{{hh50}}</td>
+                {{/each}}
+              </tr>
+              <tr>
+                <td style="background-color: rgba(231,76,60, 0.2)">100%</td>
+                {{#each colaborators}}
+                <td>{{hh100}}</td>
+                {{/each}}
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-wrapper">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-8">
+            <h2><span class="glyphicon glyphicon-stats"></span> Reportes</h2>
+            <ul id="main-nav-tabs" class="nav nav-tabs">
+              <li id="tab-global" role="presentation" class="active">
+                <a href="#">
+                  <span class="glyphicon glyphicon-globe"></span> Global
+                </a>
+              </li>
+              <li id="tab-colaborator" role="presentation">
+                <a href="#">
+                  <span class="glyphicon glyphicon-user"></span> Trabajador
+                </a>
+              </li>
+            </ul>
+            <div style="text-align: center">
+              <h3 style="font-size: 22px; margin-top: 16px"><b>{{chart.title}}</b></h3>
+              <h4>{{chart.subtitle}}</h4>
+              <div id="div-colaborator" class="form-group" style="display: none; max-width: 240px; margin: 0 auto">
+                <select id="select-colaborator" class="form-control">
+                  {{#each colaborators}}
+                  <option id="{{_id}}">{{profile.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div id="chart-container"></div>
+            <div style="clear:both"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

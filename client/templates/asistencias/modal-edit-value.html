@@ -1,0 +1,62 @@
+<template name="modalEditValue">
+  <div class="modal fade" id="modal-edit-value" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4>{{#if modalValues.isGlobal}}Observación del día {{modalValues.day}}{{else}}{{#if isEditing}}Edición{{else}}Creación{{/if}} de Marcación{{/if}}</h4>
+        </div>
+        <div class="modal-body">
+          {{#if esGerente}}
+          <div class="row" style="display: {{#if modalValues.isGlobal}}none{{else}}block{{/if}}">
+            <div class="col-xs-8 col-md-9" style="display: inline-block">
+              <div class="form-group" style="float:left; width: 122px; ">
+                <span>Hora</span>              
+                <input class="form-control assistance-time" placeholder="HH:MM" style="padding: 0px; text-align: center; font-size: 30px; height: 60px;" id="assist-time" value="--:--" />
+              </div>
+              {{#if modalValues.esPrimera}}
+              <div class="checkbox" style="top: 40px;">
+                <label>
+                  <input id="checkbox-forzada" type="checkbox" value="{{#if modalValue.esForzada}}checked{{/if}}">
+                  <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> Forzar cálculo
+                </label>
+              </div>
+              {{/if}}
+            </div>
+            <div class="col-xs-4 col-md-3">
+              <div class="form-group" style="text-align: right">
+                <button type="button" class="btn btn-danger" id="btn-eliminar">
+                  <h4 class="glyphicon glyphicon-trash"></h4>
+                  <br/><span>&nbsp;&nbsp;Eliminar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+          <div class="row">
+            <div class="col-xs-12">
+              <span>Observación</span>
+            </div>
+            <div class="col-xs-12">
+              <div class="form-group">
+                {{#if esAsesor}}
+                <textarea id="change-log" class="form-control" cols="0" rows="5" style="width:100%; resize: none;" readonly></textarea>
+                {{else}}
+                <textarea id="change-log" class="form-control" cols="0" rows="5" style="width:100%; resize: none;"></textarea>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btn-confirm">
+            <span class="glyphicon glyphicon-ok"></span> Aceptar
+          </button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,47 @@
+<template name="login">
+  <div class="page auth">
+    <nav>
+      <div class="nav-group">
+        <a href="#" class="js-menu nav-item"><span class="glyphicon glyphicon-tasks" style="color: darkslategray;"></span></a>
+      </div>
+    </nav>
+
+    <div class="content-scrollable">
+      <div class="wrapper-auth">
+        <img src="/img/aliados/{{entornoApp.identificador}}/logo-{{entornoApp.identificador}}.png" style="max-height: 25vh; max-width: 89%;"/>
+        <div style="padding: 16px">
+        {{#if entornoApp.esBase}}
+          <h1 style="font-family: Arial Black, Helvetica, Verdana, sans-serif; font-weight:900; font-size: 52px; color: #27AE5E">yGa <small>v0.1</small></h1>
+          <h2 style="font-family: Arial Black, Helvetica, Verdana, sans-serif; font-weight:900; font-size: 26px; color: #27AE5E">Bienvenid@</h2>
+        {{else}}
+          <h2>Plataforma de Gestión <small>v1.2.2</small></h2>
+          <h3>Bienvenid@</h3>
+        {{/if}}
+        </div>
+        <form>
+          {{#if errorMessages}}
+          <div class="list-errors">
+            {{#each errorMessages}}
+            <div class="list-item">{{this}}</div>
+            {{/each}}
+          </div>
+          {{/if}}
+
+          <div class="input-symbol {{errorClass 'email'}}">
+            <input type="email" name="email" placeholder="Your Email" />
+            <span class="icon-email" title="Your Email"></span>
+          </div>
+
+          <div class="input-symbol {{errorClass 'password'}}">
+            <input type="password" name="password" placeholder="Password" />
+            <span class="icon-lock" title="Password"></span>
+          </div>
+
+          <button type="submit" class="btn-primary" style="background-color: {{entornoApp.colorBase}}">
+            <span class="glyphicon glyphicon-knight"></span> Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

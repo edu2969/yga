@@ -1,0 +1,176 @@
+<template name="facturas">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1><span class="glyphicon glyphicon-usd"></span> Facturación</h1>
+        </div>
+      </div>
+      <ul class="nav nav-tabs" style="margin-bottom: 8px">
+        <li role="presentation" class="active">
+          <a data-toggle="tab" href="#listado">
+            <span class="glyphicon glyphicon-list-alt"></span> Listado
+          </a>
+        </li>
+        <li role="presentation" class="">
+          <a data-toggle="tab" href="#resumenes">
+            <span class="glyphicon glyphicon-copy"></span> Libro menor
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="listado">
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <span>Cliente</span>
+              <div class="left-inner-addon">
+                <i class="glyphicon glyphicon-user"></i>
+                <input id="input-empresas-search" 
+                      class="typeahead form-control" 
+                      placeholder="Razón"
+                      autocomplete="off" spellcheck="off"
+                      data-source="empresasSugeridas"
+                      data-select="empresaSeleccionada"/>          
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <span>N°Cotización</span>
+              <div class="left-inner-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input id="input-cotizaciones-search" 
+                      class="typeahead form-control" 
+                      placeholder="N°Cotizacion"
+                      autocomplete="off" spellcheck="off"
+                      data-source="facturasSugeridas"
+                      data-select="facturaSeleccionada"/>
+              </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <span>Estado</span>
+              <div class="form-group">
+                <select class="form-control" id="select-estado-search">
+                  <option>Seleccione un estado</option>
+                  {{#each estados}}
+                  <option id="{{codigo}}">({{cantidad}}) {{glosa}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            
+          </div>
+          <div style="clear:both; margin-bottom: 16px; height: 16px;"></div>
+
+          {{#each facturas}}
+          <div class="element-list-container" style="{{estiloListContainer}}">
+            <div class="row">
+              <div class="col-xs-12">
+                <h3>{{numero}}. <b>{{{ titulo }}}</b></h3>
+                <h2>{{ empresa.razon }}</h2>
+                <h4>{{ empresa.contactoNombre }}<small> {{ empresa.contactoEmail }}</small></h4>
+                <div style="display: inline-block">
+                  <span>Estado: </span>
+                  <div class="form-group" style="display: inline-block">
+                    <select cotizacion="{{_id}}" class="form-control" id="select-estado-factura">
+                      {{#each estados}}
+                      <option id="{{codigo}}" {{selectedEval codigo ../factura.estado}}>{{glosa}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  {{#if recibeComentarios}}
+                  <button cotizacion="{{_id}}" class="btn btn-comentar-pagos btn-warning">
+                    <span class="glyphicon glyphicon-bell"></span> Comentar pagos
+                  </button>
+                  {{/if}}
+                  {{#if pagos}}
+                  <h6><span class="glyphicon glyphicon-info-sign"></span> {{factura.pagos}}</h6>
+                  {{/if}} 
+                  {{#if estaFacturada}}
+                  <span><span class="glyphicon glyphicon-check"></span> B.Elec.SII N°{{factura.nsii}}</span>
+                  {{/if}}
+                </div>
+                <h3>Total {{maskPrice total '$'}}</h3>
+              </div>
+            </div>
+          </div>
+          {{else}}
+          <div class="wrapper-empty-list">
+            <h1>Sin coincidencias</h1>
+          </div>
+          {{/each}}
+        </div>
+        <div role="tabpanel" class="tab-pane" id="resumenes">
+          <div class="col-xs-12 col-md-4">
+            <span>Empresas</span>
+            <div class="left-inner-addon">
+              <i class="glyphicon glyphicon-user"></i>
+              <input id="input-empresas-search-2" 
+                    class="typeahead form-control" 
+                    placeholder="Razón"
+                    autocomplete="off" spellcheck="off"
+                    data-source="empresasSugeridas"
+                    data-select="empresaResumenSeleccionada"/>          
+            </div>
+          </div>
+          
+          <div class="col-xs-12 col-md-4">
+            <span>Periodo</span>
+            <div class="form-group">
+              <div id="datepicker-periodo" class="input-group date datetimepicker-component">
+                <input class="form-control" id="input-periodo" />
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xs-12 col-md-4" style="text-align: right">
+            <button type="button" class="btn-lg btn-primary btn-libro-menor">
+              <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+              <br/>Libro Menor
+            </button>
+          </div>
+          
+          <div class="col-xs-12" style="padding-top: 20px;">
+            <table class="tabla-resumen-facturacion">
+              <tr>
+                <th>N°</th>
+                <th>Fecha</th>
+                <th>Empresa</th>
+                <th>Neto</th>
+                <th>Iva</th>
+                <th>Total</th>
+              </tr>
+              {{#each resumen.facturas}}
+              <tr>
+                <td>{{numero}}</td>
+                <td>{{formatDate fecha "DD/MM/YY"}}</td>
+                <td>{{empresa}}</td>
+                <td style="text-align: right">{{maskPrice neto '$'}}</td>
+                <td style="text-align: right">{{maskPrice iva '$'}}</td>
+                <td style="text-align: right">{{maskPrice total '$'}}</td>
+              </tr>
+              {{else}}
+              <tr>
+                <td colspan="6" style="text-align: center; font-size: 18px;">SIN FACTURAS</td>
+              </tr>
+              {{/each}}
+              <tr>
+                <td colspan="3">TOTALES</td>
+                <td style="text-align: right">{{#if resumen.facturas}}{{maskPrice resumen.neto '$'}}{{else}}$ 0{{/if}}</td>
+                <td style="text-align: right">{{#if resumen.facturas}}{{maskPrice resumen.iva '$'}}{{else}}$ 0{{/if}}</td>
+                <td style="text-align: right">{{#if resumen.facturas}}{{maskPrice resumen.total '$'}}{{else}}$ 0{{/if}}</td>
+              </tr>
+            </table>
+          </div>
+          
+          
+        </div>
+      </div>        
+    </div>
+  </div>
+</template>

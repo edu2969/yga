@@ -1,0 +1,42 @@
+<template name="empresas">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-8" style="margin-top: 8px; margin-bottom: 16px;">
+          <h1><span class="glyphicon glyphicon-tower"></span> Empresas</h1>
+        </div>
+        <div class="col-xs-4" style="text-align: right; margin-bottom: 12px;">
+          <button type="button" id="{{_id}}" 
+                  class="btn-lg btn-success btn-block btn-agregar">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Nueva
+          </button>
+        </div>
+      </div>
+
+      {{#each empresas}}
+      <div class="element-list-container" style="{{estiloListContainer}}">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3><b>{{{ razon }}}</b></h3>
+            <span>RUT: {{ rut }}</span>
+          </div>
+          {{#if esAdmin}}
+          <div class="col-xs-12" style="text-align: right">
+            <button type="button" id="{{_id}}" class="btn btn-info btn-editar">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+            </button>
+            {{#unless esPropietario}}
+            <button type="button" id="{{_id}}" class="btn btn-danger btn-eliminar">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+            </button>
+            {{/unless}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+
+    </div>
+  </div>
+</template>

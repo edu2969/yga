@@ -1,0 +1,228 @@
+<template name="gastoEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-8">
+          <h1> {{#if cotizacionSeleccionada}}Edición de{{else}}Nuevo{{/if}} Gasto</h1>
+        </div>
+        <div class="col-xs-4" style="text-align: right">
+          <button type="button" id="{{_id}}" class="btn btn-primary btn-edit">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"> PDF</span>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <span>Número</span>
+          <div class="form-group">
+            <input id="input-quote-term" class="form-control" placeholder="Plazo" value="{{cotizacionSeleccionada.numero}}" />
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <span>Tipo Gasto</span>
+          <div class="form-group">
+            <select class="form-control" id="select-proyecto-estado">
+              <option id="false">Seleccione tipo de gasto</option>
+              <option id="OC">OC</option>
+              <option id="HH">HH</option>
+              <option id="IN">Insumos</option>
+              <option id="ES">Estadía</option>
+              <option id="CO">Colaciones</option>
+              <option id="MO">Movilizción</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div id="panel-OC">
+        <div class="row">
+          <div class="col-xs-6">
+            <span>Estado</span>
+            <div class="form-group">
+              <select class="form-control" id="select-proyecto-estado">
+                <option id="false">Creada</option>
+                <option id="0">OC Enviada</option>
+                <option id="1">OC Cerrada</option>
+                <option id="2">Terminado</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <span>Proveedor</span>
+            <div style="vertical-align: top; display: inline">
+              <div class="form-inline">
+                <select class="form-control" id="select-proyecto-estado">
+                  <option id="false">Seleccione Proveedor</option>
+                  {{#if proveedoresCount}}{{#each proveedores}}
+                  <option id="{{rut}}">{{nombre}}</option>
+                  {{/each}}{{/if}}
+                </select>
+                <button class="btn btn-info btn-add-proveedor glyphicon glyphicon-plus"> Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <span>Condiciones</span>
+            <div class="form-group">
+              <input id="input-quote-term" class="form-control" placeholder="Plazo" value="{{cotizacionSeleccionada.plazo}}" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h2 class="col-xs-12" style="clear: both">Listado de Items</h2>
+        </div>
+        {{#if itemsCounter}} {{#each items}}
+        <div class="element-list-container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3><b>{{indice}}. {{nombre}}</b></h3>
+              <h4>{{cantidad}} x {{moneda}} {{maskPrice valor}}</h4>
+              <h4><b>Total: {{moneda}} {{maskPrice total}}</b></h4>
+            </div>
+            <div class="col-xs-12" style="text-align: right">
+              <button type="button" id="{{_id}}" class="btn btn-info btn-edit">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"> Editar</span>
+              </button>
+              <button type="button" id="{{_id}}" class="btn btn-danger btn-delete">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"> Eliminar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {{/each}} {{else}}
+        <div class="wrapper-empty-list">
+          <h2>No hay items de gasto</h2>
+          <button class="btn btn-info"><span class="glyphicon glyphicon-plus"> Add</span></button>
+        </div>
+        {{/if}}
+      </div>
+      
+      <div id="panel-HH">
+        <div class="row">
+          <div class="col-xs-6">
+            <span>Tipo de trabajo</span>
+            <div class="form-group">
+              <select class="form-control" id="select-proyecto-estado">
+                <option id="false">Seleccione un tipo</option>
+                <option id="0">Trabajo en terreno</option>
+                <option id="1">Servicio</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <span>Persona</span>
+            <div style="vertical-align: top; display: inline">
+              <div class="form-inline">
+                <select class="form-control" id="select-proyecto-estado">
+                  <option id="false">Seleccione uno</option>
+                  <option id="0">Alvaro Troncoso</option>
+                  <option id="1">Eduardo Troncoso</option>
+                  <option id="2">Alejandro Troncoso</option>
+                  <option id="3">Excequiel</option>
+                </select>
+                <button class="btn btn-primary btn-add-proveedor glyphicon glyphicon-plus"> Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Horas Estimadas</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-horas" class="form-control" placeholder="HH Estimadas" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Precio Total</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-total" class="form-control" placeholder="Precio Total" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Precio HH</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-precio-hora" class="form-control" placeholder="Precio HH" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <div id="panel-HH">
+        <div class="row">
+          <div class="col-xs-6">
+            <span>Tipo de trabajo</span>
+            <div class="form-group">
+              <select class="form-control" id="select-proyecto-estado">
+                <option id="false">Seleccione un tipo</option>
+                <option id="0">Trabajo en terreno</option>
+                <option id="1">Servicio</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <span>Persona</span>
+            <div style="vertical-align: top; display: inline">
+              <div class="form-inline">
+                <select class="form-control" id="select-proyecto-estado">
+                  <option id="false">Seleccione uno</option>
+                  <option id="0">Alvaro Troncoso</option>
+                  <option id="1">Eduardo Troncoso</option>
+                  <option id="2">Alejandro Troncoso</option>
+                  <option id="3">Excequiel</option>
+                </select>
+                <button class="btn btn-primary btn-add-proveedor glyphicon glyphicon-plus"> Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Horas Estimadas</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-horas" class="form-control" placeholder="HH Estimadas" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Precio Total</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-total" class="form-control" placeholder="Precio Total" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Precio HH</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-precio-hora" class="form-control" placeholder="Precio HH" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+      <div id="panel-insumo">
+        <div class="row">
+          <div class="col-xs-4">
+            <span>Tipo</span>
+            <div class="form-group">
+              <select class="form-control" id="select-proyecto-estado">
+                <option id="false">Seleccione un tipo</option>
+                <option id="0">Herramientas</option>
+                <option id="0">Materiales</option>
+                <option id="1">Servicios</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Detalle</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-horas" class="form-control" placeholder="HH Estimadas" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <span>Valor</span>
+            <div class="form-group">
+              <input id="input-gasto-hh-horas" class="form-control" placeholder="HH Estimadas" value="{{gasto.hh.horas}}" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</template>

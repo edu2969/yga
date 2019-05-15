@@ -1,0 +1,234 @@
+<template name="empresaEdit">
+  <div class="page lists-show">
+    {{>topNav}}
+    <div class="content-scrollable list-items">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>{{#if empresa._id}}<span class="glyphicon glyphicon-pencil"></span> {{empresa.razon}}{{else}}* Nueva{{/if}}</h1>
+        </div>
+      </div>
+      {{>mensajes}}
+      <ul class="nav nav-tabs" style="margin-bottom: 8px">
+        <li role="presentation"><a data-toggle="tab" href="#datos"><span class="glyphicon glyphicon-edit"></span> Datos</a></li>
+        {{#if esAdmin}}
+        <li role="presentation">
+          <a data-toggle="tab" href="#equipo">
+            <span class="glyphicon glyphicon-bishop"></span> Equipo ({{cantidadIntegrantes}})
+          </a>
+        </li>
+        {{/if}}
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="datos">
+          <div class="row">            
+            <div class="col-xs-12">
+              <span>Creador</span>
+              <div class="form-group">
+                <select id="select-creadorId" class="form-control" tipo="select-id">
+                  {{#each creadores}}
+                  <option id="{{_id}}" {{selectedEval _id empresa.creadorId}}>{{this.profile.name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <span>Razón Social</span>
+              <div class="form-group">
+                <input id="input-razon" class="form-control" placeholder="Razón" tipo="texto" value="{{empresa.razon}}" />
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <span>RUT</span>
+              <div class="form-group">
+                <input id="input-rut" class="form-control" placeholder="RUT" tipo="texto" value="{{empresa.rut}}" />
+              </div>
+            </div>
+          </div>
+          {{#if esAdmin}}
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <span>Creación</span>
+              <div class="form-group" style="margin-bottom: 7px">
+                <div class="input-group date datetimepicker-component">
+                  <input class="form-control" id="input-creacion" value="{{formatDate empresa.creacion 'DD/MM/YY'}}" tipo="fecha" />
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <span>Color principal corporativo</span>
+              <div class="input-group colorpicker-component" id="color-picker-component">
+                <input id="input-color" class="form-control" value="{{empresa.color}}" tipo="texto"/>
+                <span class="input-group-addon"><i></i></span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <span>Tarifa</span>
+              <div class="form-group row">
+                <div class="col-xs-4">
+                  <select class="form-control" id="select-tarifa" tipo="select-id">
+                    <option id="M" {{selectedEval 'M' empresa.tarifa}}>Mensual</option>
+                    <option id="A" {{selectedEval 'A' empresa.tarifa}}>Anual</option>
+                    <option id="S" {{selectedEval 'S' empresa.tarifa}}>Semestral</option>
+                    <option id="F" {{selectedEval 'F' empresa.tarifa}}>Flexible</option>
+                  </select>
+                </div>
+                <div class="col-xs-8">
+                  <input class="form-control" id="input-cobro" value="{{empresa.cobro}}"  placeholder="Valor" tipo="texto">
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+          <div class="row">
+            <div class="col-xs-12 col-lg-4">
+              <span>Rubro</span>
+              <div class="form-group">
+                <input class="form-control" id="input-rubro" value="{{empresa.rubro}}"  placeholder="Rubro" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+              <span>Dirección</span>
+              <div class="form-group">
+                <input class="form-control" id="input-direccion" value="{{empresa.direccion}}"  placeholder="Dirección" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+              <span>Fonos</span>
+              <div class="form-group">
+                <input class="form-control" id="input-telefonos" value="{{empresa.telefonos}}"  placeholder="Telefonos" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <span>Nombre Contacto</span>
+              <div class="form-inline">
+                <div class="form-group">
+                  <select class="form-control" id="select-atencion" tipo="select-id">
+                    <option id="Sr." {{selectedEval 'Sr.' empresa.atencion}}>Señor (Sr.)</option>
+                    <option id="Sra." {{selectedEval 'Sra.' empresa.atencion}}>Señora (Sra.)</option>
+                    <option id="Srta." {{selectedEval 'Srta.' empresa.atencion}}>Señorita (Sta.)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" id="input-contactoNombre" value="{{empresa.contactoNombre}}"  placeholder="Texto" tipo="texto">
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <span>Cargo</span>
+              <div class="form-group">
+                <input class="form-control" id="input-cargo" value="{{empresa.cargo}}"  placeholder="Texto" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <span>email Contacto</span>
+              <div class="form-group">
+                <input class="form-control" id="input-contactoEmail" value="{{empresa.contactoEmail}}"  placeholder="email@ejemplo.cl" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <span>Nombre Contacto Copia</span>
+              <div class="form-inline">
+                <div class="form-group">
+                  <select class="form-control" id="select-atencionCC" value="{{empresa.atencionCC}}" tipo="select-id">
+                    <option id="Sr." {{selectedEval 'Sr.' empresa.atencionCC}}>Señor (Sr.)</option>
+                    <option id="Sra." {{selectedEval 'Sra.' empresa.atencionCC}}>Señora (Sra.)</option>
+                    <option id="Srta." {{selectedEval 'Srta.' empresa.atencionCC}}>Señorita (Sta.)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" id="input-contactoNombreCC" value="{{empresa.contactoNombreCC}}"  placeholder="Texto" tipo="texto">
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <span>URL link</span>
+              <div class="form-group">
+                <input class="form-control" id="input-url" value="{{empresa.url}}"  placeholder="http://www.ejemplo.cl" tipo="texto">
+              </div>
+            </div>
+            {{#if esSimen}}
+            <div class="col-xs-12">
+              <h3>Cuentas</h3>
+            </div>
+            <div class="col-xs-6">
+              <span>Banco</span>
+              <div class="form-group">
+                <select class="form-control" id="select-banco1" tipo="select-id">
+                  <option id="BCI" {{selectedEval 'BCI' empresa.banco1}}>BCI</option>
+                  <option id="STD" {{selectedEval 'STD' empresa.banco1}}>Bco.Santander</option>
+                  <option id="CBC" {{selectedEval 'CBC' empresa.banco1}}>Corp Banca</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <span>Cuenta N°</span>
+              <div class="form-group">
+                <input class="form-control" id="input-cuenta1" value="{{empresa.cuenta1}}"  placeholder="Texto" tipo="texto">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <select class="form-control" id="select-banco2" tipo="select-id">
+                  <option id="BCI" {{selectedEval 'BCI' empresa.banco2}}>BCI</option>
+                  <option id="STD" {{selectedEval 'STD' empresa.banco2}}>Bco.Santander</option>
+                  <option id="CBC" {{selectedEval 'CBC' empresa.banco2}}>Corp Banca</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <input class="form-control" id="input-cuenta2" value="{{empresa.cuenta2}}"  placeholder="Texto" tipo="texto">
+              </div>
+            </div>
+            {{/if}}
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <span>Nota</span>
+              <div class="form-group">
+                <textarea rows="3" class="form-control" id="input-nota" tipo="texto">{{empresa.nota}}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="equipo">
+          <div class="row">
+            <h2 class="col-xs-8" style="clear: both">Equipo</h2>
+            <div class="col-xs-4" style="text-align: right; margin-bottom: 12px">
+              <button class="btn btn-block btn-primary btn-agregar-integrante">
+                <span class="glyphicon glyphicon-plus"></span> Add
+              </button>
+            </div>
+          </div>
+          {{#each integrantes}}
+          <div class="element-list-container" style="{{estiloListContainer}}">
+            <div class="row">
+              <div class="col-xs-12">
+                <h3><b>{{nombre}}</b><br/><small> {{rol}}</small></h3>
+              </div>
+              <div class="col-xs-12" style="text-align: right">
+                <button type="button" id="{{_id}}" class="btn btn-primary btn-editar-integrante">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+                </button>
+                <button type="button" id="{{_id}}" class="btn btn-danger btn-eliminar-integrante">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+          {{else}}
+          <div class="wrapper-empty-list">
+            <h2>No hay equipo definido</h2>
+          </div>
+          {{/each}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>

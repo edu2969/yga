@@ -1,0 +1,87 @@
+.js-menu.nav-item {
+  margin-top: 10px;
+  margin-left: 0px;
+  font-size: 24px;
+}
+
+.page.auth {
+  text-align: center;
+
+  .content-scrollable { background: white; }
+
+  .wrapper-auth {
+    padding-top: 1em;
+    width: 100%;
+
+    @media screen and (min-width: 40em) {
+      margin: 0 auto;
+    }
+
+    .title-auth {
+      .type-light;
+      color: @color-ancillary;
+      margin-bottom: .75rem;
+    }
+
+    .subtitle-auth {
+      color: @color-medium-well;
+      margin: 0 15% 3rem;
+    }
+
+    form {
+      width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+      .input-symbol {
+        margin-bottom: 4px;
+        width: 100%;
+      }
+
+      .btn-primary {
+        margin-top: 1em;
+        width: 180px;
+        height: 80px;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: bolder;
+
+        @media screen and (min-width: 40em) {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+      
+      input {
+        border-radius: 6px;
+        height: 60px;
+      }
+      
+      input, span {
+        font-size: 26px;
+      }
+    }
+    .list-errors {
+      margin-top: 0rem;
+      .list-item {
+        .title-caps;
+        background: @color-note;
+        color: @color-negative;
+        font-size: .625em; // 10px
+        margin-bottom: 1px;
+        padding: .7rem 0;
+      }
+    }
+  }
+
+  .link-auth-alt {
+    .position(absolute, auto, 0, 1em, 0);
+    color: @color-medium;
+    display: inline-block;
+
+    @media screen and (min-width: 40em) {
+      bottom: 0;
+      margin-top: 1rem;
+      position: relative;
+    }
+  }
+}

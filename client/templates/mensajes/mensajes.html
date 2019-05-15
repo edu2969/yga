@@ -1,0 +1,25 @@
+<template name="mensajes">
+  {{#if mensajes}}
+  <div class="list-errors" style="clear: both">
+    {{#if mensajes.danger}}
+    <div class="alert alert-danger" role="alert">
+      {{#each mensajes.danger}}
+      <span class="glyphicon glyphicon-remove"></span> {{item}}
+      <br/>{{/each}}
+    </div>
+    {{/if}} {{#if mensajes.warning}}
+    <div class="alert alert-warning" role="alert">
+      {{#each mensajes.warning}}
+      <span class="glyphicon glyphicon-warning-sign"></span> {{item}}
+      <br/>{{/each}}
+    </div>
+    {{/if}} {{#if mensajes.success}}
+    <div class="alert alert-success" role="alert">
+      {{#each mensajes.success}}
+      <span class="glyphicon glyphicon-ok"></span> {{item}}
+      <br/>{{/each}}
+    </div>
+    {{/if}}
+  </div>
+  {{/if}}
+</template>
