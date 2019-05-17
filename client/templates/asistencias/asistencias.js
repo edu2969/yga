@@ -25,6 +25,65 @@ Template.asistencias.rendered = function () {
   }
 }
 
+Template.asistencias.helpers({
+  chart: function () {
+    return Session.get('ChartParams');
+  },
+  colaborators: function () {
+    var periodo = Session.get("PeriodoResumen")
+    if (!periodo) return false;
+    var fecha = moment(periodo, "MMMM'YY")
+    var mes = fecha.month()
+    var anyo = fecha.year()
+    return Meteor.users.find({
+      "profile.role": 6,
+      "profile.prioridad": { $exists: true },
+      "profile.desvinculado": {
+        $not: true
+      }
+    }, { sort: { "profile.prioridad": 1 }}).map(function (o, i) {
+      var reg = BIAsistencias.findOne({
+        userId: o._id,
+        month: mes,
+        year: anyo
+      });
+      o.hhNormal = reg ? reg.hhNormal : 0;
+      o.hh50 = reg ? reg.hhExt50 : 0;
+      o.hh100 = reg ? reg.hhExt100 : 0;
+      // La tabla muestra horas compensadas
+      if (o.hhNormal < 0) {
+        if (-1 * o.hhNormal > o.hh50) {
+          o.hhNormal = o.hhNormal + o.hh50
+          o.hh50 = 0
+        } else {
+          o.hh50 = o.hh50 + o.hhNormal
+          o.hhNormal = 0
+        }
+      }
+      // Si aún no son cubiertas, se cubren con HH al 100%
+      if (o.hhNormal < 0) {
+        if (-1 * o.hhNormal > o.hh100) {
+          o.hhNormal = o.hhNormal + o.hh100
+          o.hh100 = 0
+        } else {
+          o.hh100 = o.hh100 + o.hhNormal
+          o.hhNormal = 0
+        }
+      }
+      return o;
+    });
+  },
+  periodo: function () {
+    return Session.get("PeriodoResumen")
+  },
+  esGerente: function() {
+    return Meteor.user() && Meteor.user().profile.role <= 2;
+  },
+  puedeImportar: function() {
+    return Meteor.user() && Meteor.user().profile.role <= 3;
+  }
+});
+
 Template.asistencias.events({
   'click #tab-global': function (e) {
     e.preventDefault();
@@ -88,65 +147,6 @@ Template.asistencias.events({
       dl.click();
       document.body.removeChild(dl);
     });
-  }
-});
-
-Template.asistencias.helpers({
-  chart: function () {
-    return Session.get('ChartParams');
-  },
-  colaborators: function () {
-    var periodo = Session.get("PeriodoResumen")
-    if (!periodo) return false;
-    var fecha = moment(periodo, "MMMM'YY")
-    var mes = fecha.month()
-    var anyo = fecha.year()
-    return Meteor.users.find({
-      "profile.role": 6,
-      "profile.prioridad": { $exists: true },
-      "profile.desvinculado": {
-        $not: true
-      }
-    }, { sort: { "profile.prioridad": 1 }}).map(function (o, i) {
-      var reg = BIAsistencias.findOne({
-        userId: o._id,
-        month: mes,
-        year: anyo
-      });
-      o.hhNormal = reg ? reg.hhNormal : 0;
-      o.hh50 = reg ? reg.hhExt50 : 0;
-      o.hh100 = reg ? reg.hhExt100 : 0;
-      // La tabla muestra horas compensadas
-      if (o.hhNormal < 0) {
-        if (-1 * o.hhNormal > o.hh50) {
-          o.hhNormal = o.hhNormal + o.hh50
-          o.hh50 = 0
-        } else {
-          o.hh50 = o.hh50 + o.hhNormal
-          o.hhNormal = 0
-        }
-      }
-      // Si aún no son cubiertas, se cubren con HH al 100%
-      if (o.hhNormal < 0) {
-        if (-1 * o.hhNormal > o.hh100) {
-          o.hhNormal = o.hhNormal + o.hh100
-          o.hh100 = 0
-        } else {
-          o.hh100 = o.hh100 + o.hhNormal
-          o.hhNormal = 0
-        }
-      }
-      return o;
-    });
-  },
-  periodo: function () {
-    return Session.get("PeriodoResumen")
-  },
-  esGerente: function() {
-    return Meteor.user() && Meteor.user().profile.role <= 2;
-  },
-  puedeImportar: function() {
-    return Meteor.user() && Meteor.user().profile.role <= 3;
   }
 });
 

@@ -13,6 +13,34 @@ Template.cuentaEdit.destroyed = function () {
     delete Session.keys["ImporMessages"];
 }
 
+Template.cuentaEdit.helpers({
+    esAdmin: function () {
+        return Meteor.user() && Meteor.user().profile.role == 1;
+    },
+    esTrabajador: function () {
+        return Session.get('RolSeleccionado') == 6;
+    },
+    desvinculado: function() {
+        return Session.get('RolSeleccionado') == 7;
+    },
+    esCliente: function () {
+        return Session.get('RolSeleccionado') == 3;
+    },
+    cuentaSel: function () {
+        return Session.get('UsrSel');
+    },
+    messages: function () {
+        return Session.get('ImportMessages');
+    },
+    nombreRol: function () {
+        var rolSel = Session.get('RolSeleccionado');        
+        return NOMBRES_ROLES(rolSel);
+    },
+    profile: function () {
+        return Meteor.user() ? Meteor.user().profile : {};
+    }
+});
+
 Template.cuentaEdit.events({
     "change #cuenta-bioId": function (e) {
         hayErrores();
@@ -22,6 +50,7 @@ Template.cuentaEdit.events({
     },
     "click #btn-guardar": function (e) {
         if (hayErrores()) return;
+        var rolactual = Session.get("RolSeleccionado");
         var docSet = {
                 profile: {}
             },
@@ -38,10 +67,8 @@ Template.cuentaEdit.events({
                     Number(entrada.value) : entrada.value;
                 var atributo = entrada.id.split("-")[1];
                 var usuario = Session.get("UsrSel");
-                //debugger;
                 var oldval = atributo == "email" ? eval("usuario.emails[0].address") : eval("usuario.profile." + atributo);
                 if (oldval != valor) {
-                    //console.log("procesa", atributo, oldval, valor);
                     if (!valor) {
                         if (!atributo.includes("password") && !usuario._id) {
                             docUnset.profile[atributo] = valor;
@@ -59,13 +86,15 @@ Template.cuentaEdit.events({
                             if (usuario._id) {
                                 if (!atributo.includes("password")) {
                                     if (!valor) {
-                                        docUnset["profile." + atributo] = valor;
+                                        docUnset.profile[atributo] = valor;
                                     } else {
                                         docSet["profile." + atributo] = valor;
                                     }
                                 }
                             } else {
-                                docSet.profile[atributo] = valor;
+                                if(rolactual==6 && atributo!="bioid" && atributo!=prioridad) {
+                                    docSet["profile." + atributo] = valor;
+                                }                                
                             }
                         }
                     }
@@ -73,33 +102,17 @@ Template.cuentaEdit.events({
             }
         });
 
-        if ($("#checkbox-desvincular").is(":checked") && !usuario.profile.desvinculado) {
-            if (usuario._id) {
-                docSet["profile.desvinculado"] = true;
-            } else {
-                docSet.profile["desvinculado"] = true;
-            }
+        if (rolactual==6 && $("#checkbox-desvincular").is(":checked")) {
+            docSet["profile.role"] = 7;
         }
-        if (!$("#checkbox-desvincular").is(":checked") && usuario.profile.desvinculado) {
-            if (usuario._id) {
-                docUnset["profile.desvinculado"] = "";
-            }
+        if (rolactual==7 && $("#checkbox-reintegrar").is(":checked")) {        
+            docSet["profile.role"] = 6;
         }
-
-        var doc = {};
+        if (!usuario._id && docSet.profile.role) {
+            docSet["profile.role"] = rolactual;
+        }
         if (_.isEmpty(docSet.profile)) delete docSet.profile;
-        if (!_.isEmpty(docSet)) {
-            doc.$set = docSet;
-        }
-        if (_.isEmpty(docUnset.profile) && _.isEmpty(docUnset)) delete docUnset.profile;
-        if (!_.isEmpty(docUnset)) {
-            doc.$unset = docUnset;
-        }
-        if (usuario._id) doc._id = usuario._id;
-
-        if (!doc._id && !doc.$set.profile.role) {
-            doc.$set.profile.role = Session.get("RolSeleccionado");
-        }
+        if (_.isEmpty(docUnset.profile)) delete docUnset.profile;
 
         if (usuario._id && !_.isEmpty($("#cuenta-password").val())) {
             Meteor.call("ActualizarPassword", usuario._id, $("#cuenta-password").val(), function (err, resp) {
@@ -118,19 +131,13 @@ Template.cuentaEdit.events({
                 }
             });
         }
-        //debugger;
-        if (_.isEmpty(docSet)) {
-            delete doc.$set;
-        }
-        if (_.isEmpty(docUnset.profile)) {
-            delete doc.$unset;
-        }
+
         if (_.isEmpty(docSet) && _.isEmpty(docUnset.profile)) {
             if (_.isEmpty($("#cuenta-password").val())) {
                 Session.set("ImportMessages", {
                     warning: [{
                         item: "Sin cambios"
-        }]
+                    }]
                 });
                 setTimeout(function () {
                     Session.set("ImportMessages", []);
@@ -138,9 +145,8 @@ Template.cuentaEdit.events({
             }
             return;
         }
-        console.log(doc, docSet, docUnset);
 
-        Meteor.call("ActualizarUsuario", Meteor.userId(), doc, function (err, resp) {
+        Meteor.call("ActualizarUsuario", usuario._id, docSet, docUnset, function (err, resp) {
             if (err) {
                 Session.set("ImportMessages", {
                     danger: [{
@@ -166,38 +172,6 @@ Template.cuentaEdit.events({
     }
 });
 
-Template.cuentaEdit.helpers({
-    esAdmin: function () {
-        return Meteor.user() && Meteor.user().profile.role == 1;
-    },
-    esTrabajador: function () {
-        return Session.get('RolSeleccionado') == 6;
-    },
-    esCliente: function () {
-        return Session.get('RolSeleccionado') == 3;
-    },
-    cuentaSel: function () {
-        return Session.get('UsrSel');
-    },
-    messages: function () {
-        return Session.get('ImportMessages');
-    },
-    nombreRol: function () {
-        var rolSel = Session.get('RolSeleccionado');
-        if (!rolSel) return '#&8*!@&ˆ#)';
-        if (rolSel == 1) return '_EdU_';
-        if (rolSel == 2) return 'Gerente';
-        if (rolSel == 3) return 'Asesor';
-        if (rolSel == 4) return 'Socio';
-        if (rolSel == 5) return 'Vendedor';
-        if (rolSel == 6) return 'Trabajador';
-        return 'ERROR - Sin Rol';
-    },
-    profile: function () {
-        return Meteor.user() ? Meteor.user().profile : {};
-    }
-});
-
 var hayErrores = function () {
     var msgs = {
         danger: []
@@ -220,7 +194,7 @@ var hayErrores = function () {
         } else {
             if (!isNaN(Number($("#cuenta-bioId").val()))) {
                 Meteor.users.find({
-                    "profile.role": 6
+                    "profile.role": { $in: [6, 7]}
                 }).forEach(function (o) {
                     if (o._id != Session.get("UsrSel")._id && o.profile.bioId == Number($("#cuenta-bioId").val())) {
                         msgs.danger.push({

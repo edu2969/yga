@@ -257,17 +257,38 @@ Meteor.publishComposite('empresa', function (empresaId) {
 
 Meteor.publish("asistencias", function () {
     var hoy = moment().endOf("month");
-    var seismesesatras = moment().startOf("month").add(-6, "months");
+    var seismesesatras = moment().startOf("month").add(-12, "months");
     return Asistencias.find({
-        fecha: {
-            $gte: seismesesatras.toDate(),
-            $lte: hoy.toDate()
-        }
+        $or: [{
+            month: { 
+                $gte: seismesesatras.get("month") 
+            },
+            year: seismesesatras.get("year")
+        }, {
+            month: { 
+                $lte: hoy.get("month")
+            },
+            year: hoy.get("year")
+        }]
     });
 });
 
 Meteor.publish("biasistencias", function () {
-    return BIAsistencias.find();
+    var hoy = moment().endOf("month");
+    var seismesesatras = moment().startOf("month").add(-12, "months");
+    return BIAsistencias.find({
+        $or: [{
+            month: { 
+                $gte: seismesesatras.get("month") 
+            },
+            year: seismesesatras.get("year")
+        }, {
+            month: { 
+                $lte: hoy.get("month")
+            },
+            year: hoy.get("year")
+        }]
+    });
 });
 
 Meteor.publish("categorias", function () {
