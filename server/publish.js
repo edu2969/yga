@@ -322,22 +322,11 @@ Meteor.publish("ventas", function () {
     return Ventas.find({});
 });
 
-Meteor.publish("pacientes", function () {
-    return Pacientes.find();
+Meteor.publish("gestionots", function() {
+    return BIOts.find();
 });
 
-Meteor.publish("fichas", function () {
-    return Fichas.find();
+Meteor.publish("ots", function(bioid) {
+    return Ots.find({ bioId: bioid });
 });
 
-Meteor.publish("especialistas", function () {
-    return Especialistas.find();
-});
-
-Meteor.publish("convenios", function () {
-    return Convenios.find();
-});
-
-Meteor.publish("prestaciones", function () {
-    return Prestaciones.find();
-});

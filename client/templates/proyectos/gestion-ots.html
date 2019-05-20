@@ -1,0 +1,113 @@
+<template name="gestionots">
+    <div class="page lists-show">
+        {{>topNav}}
+        <div class="content-scrollable list-items">
+            <div class="panel-gestionots">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h2>OTs <small>Ordenes de Trabajo</small></h2>
+                    </div>
+                    <div class="col-xs-4" style="text-align: right;">
+                        <button class="btn btn-primary">
+                            <h3 class="glyphicon glyphicon-plus"></h3>
+                            <br />Nueva <b>OT</b>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="tabla-resumen-ot">
+                            <div class="celda">
+                                <div class="etiqueta">Asignadas</div>
+                                <div class="valor"><b>25</b></div>
+                            </div>
+                            <div class="celda">
+                                <div class="etiqueta">Retrasadas</div>
+                                <div class="valor"><b>4</b></div>
+                            </div>
+                            <div class="celda">
+                                <div class="etiqueta">Al mes</div>
+                                <div class="valor"><b>102</b></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tarjeta-gestion">
+                    {{#each tarjetas}}
+                        <div class="tarjeta" id="1">                            
+                            <span class="glyphicon glyphicon-user"></span>
+                            <h3>Jorge Medina <small><br/>10 años</small></h3>
+                            <div class="tablero">
+                                <div class="estadistica">
+                                    <div class="etiqueta">Rendimiento</div>
+                                    <div class="valor destacado verde"><b>94 / 280</b> (76%)</div>
+                                </div>
+                                <div class="estadistica">
+                                    <div class="etiqueta">
+                                        Actual
+                                        <div class="numero">Nº 0000001</div>
+                                    </div>
+                                    <div class="valor">
+                                        <b>Montaje armado 400</b> [<b>9</b> HH]<br/>
+                                        <span class="verde">
+                                            <span class="glyphicon glyphicon-repeat"></span>
+                                            Fin: 4 may 2019
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tarjeta" id="1">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <h3>Sergio Saavedra <small><br/>10 años</small></h3>
+                            <div class="tablero">
+                                <div class="estadistica">
+                                    <div class="etiqueta">Rendimiento</div>
+                                    <div class="valor destacado"><b>94 / 280</b> (76%)</div>
+                                </div>
+                                <div class="estadistica">
+                                    <div class="etiqueta">Actual
+                                        <div class="numero">Nº 0000004</div>
+                                    </div>
+                                    <div class="valor">
+                                        <b>Montaje armado 400</b> [<b>9</b> HH]<br/>
+                                        <span class="amarillo">
+                                            <span class="glyphicon glyphicon-info-sign"></span>
+                                            Fin: 4 may 2019
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tarjeta" id="1">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <h3>Jorge Novoa <small><br/>7 años</small></h3>
+                            <div class="tablero">
+                                <div class="estadistica">
+                                    <div class="etiqueta">Rendimiento</div>
+                                    <div class="valor destacado"><b>94 / 280</b> (76%)</div>
+                                </div>
+                                <div class="estadistica">
+                                    <div class="etiqueta">Actual
+                                        <div class="numero">Nº 0000011</div>
+                                    </div>
+                                    <div class="valor">
+                                        <b>Montaje armado 400</b> [<b>9</b> HH]<br/>
+                                        <span class="rojo">
+                                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                                            Fin: 4 may 2019
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="">No hay OTs aún asignadas.</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

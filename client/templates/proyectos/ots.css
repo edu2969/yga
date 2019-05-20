@@ -1,0 +1,97 @@
+#main-nav-tabs li {
+    text-align: center;
+}
+
+.panel-ots .glyphicon-user {
+    font-size: 25px;
+    border-radius: 50%;
+    background-color: #3A6F81;
+    padding: 14px;
+    margin: 8px 10px;
+    color: whitesmoke;
+}
+
+.panel-ots .avatar h3 {
+    margin-top: 10px;
+}
+
+.panel-ots .avatar {
+    display: flex;
+}
+
+.panel-ots .encabezado-ot-tareas {
+    background-color: #2D3E50;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px 8px 0px 0px;
+    margin-bottom: 0px;
+}
+
+.contenedor-info-ot {
+    text-align: center;
+    margin-bottom: 6px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.contenedor-info-ot .folio {
+    background-color: #2D3E50;
+    text-align: center;
+    color: #ECF0F1; 
+    padding: 2px;
+    border-radius: 8px 8px 0px 0px;    
+}
+
+.contenedor-info-ot .avatar {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 0px 0px 8px 8px;
+    border: 2px solid #2D3E50;
+}
+
+.contenedor-ot-tareas {
+    border: 2px solid #2D3E50;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.contenedor-ot-tareas .item {
+    display: flex;
+    background-color: #ECF0F1;    
+    margin: 2px;
+}
+
+.contenedor-ot-tareas .item:nth-child(odd) {
+    background-color: #BEC3C7;    
+}
+
+.contenedor-ot-tareas .check-listo {
+    width: 32px;
+    padding: 8px;
+}
+
+.contenedor-ot-tareas .check-listo .form-control {
+    width: 32px !important;
+}
+
+.contenedor-ot-tareas .descripcion-item {
+    width: calc(100% - 48px);
+    padding: 10px 10px 10px 20px;
+}
+
+.contenedor-ot-tareas .item .botonera {
+    display: flex;
+    position: relative;
+    right: 0px;
+    top: 0px;
+}
+
+.contenedor-ot-tareas .item .glyphicon {
+    border-radius: 50%;
+    padding: 10px;
+    border: 3px solid black;
+    color: black;
+    margin: 20px 6px;
+    -webkit-box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37); 
+    box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37);
+    font-size: 20px;
+}

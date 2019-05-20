@@ -1,0 +1,117 @@
+<template name="ots">
+    <div class="page lists-show">
+        {{>topNav}}
+        <div class="content-scrollable list-items">
+            <div class="panel with-nav-tabs panel-success panel-ots">
+                <div class="panel-heading">
+                    <ul id="main-nav-tabs" class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab-orden-actual">
+                                <h3 class="glyphicon glyphicon-time"></h3>
+                                <br />Órden Actual
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tab-ots-historicas">
+                                <h3 class="glyphicon glyphicon-picture"></h3>
+                                <br />OTS Históricas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tab-orden-actual" class="tab-pane fade in active">
+                            <div class="contenedor-ot-actual">
+                                <div class="contenedor-ots">
+                                    <div class="contenedor-info-ot">
+                                        <div class="folio">
+                                            <h3>Folio</h3>
+                                            <span>Nº 000001</span>
+                                        </div>
+                                        <div class="avatar">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            <h3>Jorge Medina
+                                                <small><br />10 años de antigüedad</small>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <h3 class="encabezado-ot-tareas">
+                                        <span class="glyphicon glyphicon-tasks"></span>
+                                        Tareas
+                                    </h3>
+                                    <div class="contenedor-ot-tareas">
+                                        <div class="item">
+                                            <div class="check-listo">
+                                                <input type="checkbox" class="form-control">
+                                            </div>
+                                            <div class="descripcion-item">
+                                                <h4 class="glosa">1. Pintaje estructura M01B <small>[7 HH]</small></h4>
+                                                <div class="fechas">desde 16/may 8:00 hasta 17/may 17:00</div>
+                                            </div>
+                                            <div class="botonera">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="check-listo">
+                                                <input type="checkbox" class="form-control">
+                                            </div>
+                                            <div class="descripcion-item">
+                                                <h4 class="glosa">2. Armado arnes 350" <small>[7 HH]</small></h4>
+                                                <div class="fechas">desde 16/may 8:00 hasta 17/may 17:00</div>
+                                            </div>
+                                            <div class="botonera">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="descripcion-item">
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <span>Glosa Tarea</span>
+                                                        <div class="form-group">
+                                                            <input class="form-control" placeholder="Tarea">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <span>HH</span>
+                                                        <div class="form-group">
+                                                            <input class="form-control" placeholder="HH">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <span>Desde - Hasta</span>
+                                                        <div class="form-group" style="position: relative; display: flex;">
+                                                            <input class="form-control datetimepicker-component">
+                                                            <span> - </span>
+                                                            <input class="form-control datetimepicker-component">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="botonera">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-ots-historicas" class="tab-pane fade">
+                            <h1>Historia</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

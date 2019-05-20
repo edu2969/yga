@@ -1,0 +1,105 @@
+.tabla-resumen-ot {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.tabla-resumen-ot .celda {
+    position: relative;
+    width: 120px;
+    background-color: #ECF0F1;
+    border-radius: 25%;
+    text-align: center;
+    margin: 0px 4px;
+}
+
+.tabla-resumen-ot .celda .etiqueta {
+    background-color: #2B2B2B;
+    color: white;
+    padding: 4px 6px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.tabla-resumen-ot .celda .valor {
+    padding: 4px 6px;
+    font-size: 32px;    
+    font-family: "Buildings";
+}
+
+.tarjeta-gestion {
+    display: flex;
+}
+
+.tarjeta {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: calc(33% - 24px);
+    background-color: #3A6F8166;
+    border-radius: 10px;
+    padding: .5em;
+    text-align: center;
+    -webkit-box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37); 
+    box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37);
+    transition: all 0.2s ease;
+    margin: 12px;
+    cursor: pointer;
+}
+
+.tarjeta-gestion .tarjeta:hover {
+    top: -4px;
+    left: -4px;
+    box-shadow: 6px 7px 20px 9px rgba(0,0,0,0.37);
+}
+
+.tarjeta-gestion .tarjeta .numero {
+    font-size: 11px;
+    width: 100%;
+    color: ghostwhite;
+}
+
+.tarjeta-gestion .tarjeta .glyphicon-user {
+    font-size: 60px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 14px;
+    margin-bottom: 8px;
+}
+
+.tarjeta-gestion .tarjeta .tablero {
+    width: 100%;
+}
+
+.tarjeta-gestion .tarjeta .tablero .estadistica {
+    background-color: #F0DFB499;
+    color: #34495E;
+    border-radius: 8px;
+    margin: 5px;
+}
+
+.tarjeta-gestion .tarjeta .tablero .estadistica .etiqueta {
+    background-color: #2B2B2B;
+    color: white;
+    padding: 4px 6px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;  
+}
+
+.tarjeta-gestion .verde {
+    color: forestgreen;
+}
+
+.tarjeta-gestion .amarillo {
+    color: yellow;
+}
+
+.tarjeta-gestion .rojo {
+    color: orangered;
+}
+
+.tarjeta-gestion .destacado {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: "Buildings";
+}
