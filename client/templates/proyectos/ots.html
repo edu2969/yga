@@ -8,13 +8,13 @@
                         <li class="active">
                             <a data-toggle="tab" href="#tab-orden-actual">
                                 <h3 class="glyphicon glyphicon-time"></h3>
-                                <br />Órden Actual
+                                <br />OT Actual
                             </a>
                         </li>
                         <li>
                             <a data-toggle="tab" href="#tab-ots-historicas">
                                 <h3 class="glyphicon glyphicon-picture"></h3>
-                                <br />OTS Históricas
+                                <br />OT's Históricas
                             </a>
                         </li>
                     </ul>
@@ -27,14 +27,40 @@
                                 <div class="contenedor-ots">
                                     <div class="contenedor-info-ot">
                                         <div class="folio">
-                                            <h3>Folio</h3>
-                                            <span>Nº 000001</span>
+                                            <h3><small>Folio Nº </small>000001</h3>
                                         </div>
-                                        <div class="avatar">
+                                        <div class="resumen">
                                             <span class="glyphicon glyphicon-user"></span>
-                                            <h3>Jorge Medina
-                                                <small><br />10 años de antigüedad</small>
-                                            </h3>
+                                            <div class="datos">
+                                                <div class="form-group" style="position: relative;">
+                                                    <span>Fecha creación</span>
+                                                    <input class="form-control datetimepicker-component">
+                                                </div>
+                                                <div class="form-group">
+                                                    <span>Para</span>
+                                                    <select class="form-control" id="select-trabajador">
+                                                        <option id="1">Jorge Medina</option>
+                                                        <option id="2">Richard Saavedra</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span>Revisor</span>
+                                                    <select class="form-control" id="select-revisor">
+                                                        <option id="1">Diego Mendoza</option>
+                                                        <option id="2">Ricardo Gatica</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="estadisticas">
+                                                <span>Rendimiento</span>
+                                                <div class="numeros">
+                                                    9 / 12 (80%)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="botonera">
+                                            <span class="boton-simple glyphicon glyphicon-plus"></span> Agregar
+                                            <span class="boton-simple glyphicon glyphicon-print"></span> Imprimir
                                         </div>
                                     </div>
                                     <h3 class="encabezado-ot-tareas">
@@ -42,35 +68,45 @@
                                         Tareas
                                     </h3>
                                     <div class="contenedor-ot-tareas">
+                                        
+                                        {{#each tareas}}
                                         <div class="item">
-                                            <div class="check-listo">
-                                                <input type="checkbox" class="form-control">
+                                            <div class="etiqueta">
+                                                <span class="glyphicon glyphicon-ok"></span> Finalizada
                                             </div>
-                                            <div class="descripcion-item">
-                                                <h4 class="glosa">1. Pintaje estructura M01B <small>[7 HH]</small></h4>
-                                                <div class="fechas">desde 16/may 8:00 hasta 17/may 17:00</div>
+                                            <div class="contenido-item">
+                                                <div class="check-listo">
+                                                    <input type="checkbox" class="form-control">
+                                                </div>
+                                                <div class="descripcion-item">
+                                                    <h4 class="glosa">2. Armado arnes 350" <small>[7 HH]</small></h4>
+                                                    <div class="fechas">desde <b>16/may 8:00</b> al <b>17/may 17:00</b></div>
+                                                    <div class="observaciones">
+                                                        <h5><small>Observaciones</small></h5>
+                                                        <ul>
+                                                            <li><span class="glyphicon glyphicon-exclamation-sign"></span> Dolencia lumbar</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="botonera">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                                <span class="glyphicon glyphicon-trash"></span>
+                                                <span class="boton-simple glyphicon glyphicon-edit"></span> Editar
+                                                <span class="boton-simple glyphicon glyphicon-trash"></span> Eliminar
                                             </div>
                                         </div>
-                                        <div class="item">
-                                            <div class="check-listo">
-                                                <input type="checkbox" class="form-control">
-                                            </div>
-                                            <div class="descripcion-item">
-                                                <h4 class="glosa">2. Armado arnes 350" <small>[7 HH]</small></h4>
-                                                <div class="fechas">desde 16/may 8:00 hasta 17/may 17:00</div>
-                                            </div>
-                                            <div class="botonera">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </div>
-                                        </div>
-                                        <div class="item">
+                                        {{else}}
+                                        <div class="vacio">
+                                            <h3><span class="glyphicon glyphicon-alert"></span> No hay tareas asignadas</h3>
+                                        </div>                                        
+                                        {{/each}}
+                                        
+                                        <!-- Edicion OT -->
+                                        <div class="item" id="-1" style="display: none">
                                             <div class="descripcion-item">
                                                 <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <h4>Edición de Tarea Nº 1</h4>
+                                                    </div>
                                                     <div class="col-xs-8">
                                                         <span>Glosa Tarea</span>
                                                         <div class="form-group">
@@ -89,24 +125,65 @@
                                                         <span>Desde - Hasta</span>
                                                         <div class="form-group" style="position: relative; display: flex;">
                                                             <input class="form-control datetimepicker-component">
-                                                            <span> - </span>
+                                                            <span class="espacio-fechas"> / </span>
                                                             <input class="form-control datetimepicker-component">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <h5>Observaciones</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <span>Tipo</span>
+                                                        <div class="form-group">
+                                                            <select class="form-control" id="select-tipo-observacion">
+                                                                <option>Seleccione un tipo</option>
+                                                                <option id="2">Falta de Material</option>
+                                                                <option id="3">Instrucción adicional</option>
+                                                                <option id="4">Lesión de trabajo</option>
+                                                                <option id="1">Otro...</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <span>HH Retraso</span>
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control" id="input-hh-retraso">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <span>Nota</span>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" id="textarea-nota" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="botonera">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                                <span class="glyphicon glyphicon-trash"></span>
+                                                <span class="boton-simple glyphicon label-danger glyphicon-remove"></span> Cancelar
+                                                <span class="boton-simple glyphicon label-success glyphicon-ok"></span> Guardar
                                             </div>
-                                        </div>
+                                        </div><!-- FIN Edicion OT -->
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div id="tab-ots-historicas" class="tab-pane fade">
-                            <h1>Historia</h1>
+                            <h3>Historia</h3>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span>Periodo</span>
+                                    <div class="form-group">
+                                        <input class="form-control datetimepicker-component">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

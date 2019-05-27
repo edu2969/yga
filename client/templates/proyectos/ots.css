@@ -25,28 +25,55 @@
     padding: 10px;
     border-radius: 8px 8px 0px 0px;
     margin-bottom: 0px;
+    color: white;
 }
 
 .contenedor-info-ot {
     text-align: center;
     margin-bottom: 6px;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px 8px 8px 8px;
+    background-color: white;
+    border: 2px solid #2D3E50;
 }
 
 .contenedor-info-ot .folio {
     background-color: #2D3E50;
     text-align: center;
     color: #ECF0F1; 
-    padding: 2px;
-    border-radius: 8px 8px 0px 0px;    
+    padding: 6px 2px 1px 2px;
 }
 
-.contenedor-info-ot .avatar {
-    background-color: white;
+.contenedor-info-ot .resumen {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    display: flex;
+}
+
+.contenedor-info-ot .resumen .glyphicon {
+    height: 53px;
+}
+
+.contenedor-info-ot .resumen .datos {
+    width: 100%;
+}
+
+.contenedor-info-ot .resumen #select-trabajador {
+    margin-top: 6px;
+    font-size: 20px;
+    height: 46px;
+}
+
+.contenedor-info-ot .estadisticas {
+    width: 280px;
     text-align: center;
-    padding: 10px;
-    border-radius: 0px 0px 8px 8px;
-    border: 2px solid #2D3E50;
+    padding: 6px;
+}
+
+.contenedor-info-ot .estadisticas .numeros {
+    font-family: "Buildings";
+    font-size: 42px;
+    font-weight: bolder;
 }
 
 .contenedor-ot-tareas {
@@ -54,10 +81,26 @@
     border-radius: 0px 0px 8px 8px;
 }
 
+.contenedor-ot-tareas .vacio {
+    text-align: center;
+    width: 100%;
+    padding: 18px 0px;
+}
+
 .contenedor-ot-tareas .item {
-    display: flex;
     background-color: #ECF0F1;    
     margin: 2px;
+    position: relative;
+}
+
+.contenedor-ot-tareas .item .etiqueta {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: forestgreen;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 8px;
 }
 
 .contenedor-ot-tareas .item:nth-child(odd) {
@@ -73,25 +116,45 @@
     width: 32px !important;
 }
 
+.contenedor-ot-tareas .contenido-item {
+    display: flex;
+}
+
 .contenedor-ot-tareas .descripcion-item {
-    width: calc(100% - 48px);
     padding: 10px 10px 10px 20px;
 }
 
 .contenedor-ot-tareas .item .botonera {
-    display: flex;
-    position: relative;
-    right: 0px;
-    top: 0px;
+    width: 100%;
+    text-align: right;
+    margin-top: 0px;
+    padding-right: 12px;
 }
 
-.contenedor-ot-tareas .item .glyphicon {
+.contenedor-ot-tareas .item .boton-simple,
+.contenedor-info-ot .boton-simple {
     border-radius: 50%;
     padding: 10px;
     border: 3px solid black;
     color: black;
-    margin: 20px 6px;
+    margin: 0px 6px 12px 6px;
     -webkit-box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37); 
     box-shadow: 2px 3px 16px 5px rgba(0,0,0,0.37);
     font-size: 20px;
+    height: 46px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.contenedor-ot-tareas .item .boton-simple:hover,
+.contenedor-info-ot .boton-simple:hover {
+    top: -1px;
+    left: -1px;
+    box-shadow: 2px 3px 5px 4px rgba(0,0,0,0.37);
+}
+
+.descripcion-item .espacio-fechas {
+    width: 40px;
+    text-align: center;
+    margin-top: 6px;
 }
