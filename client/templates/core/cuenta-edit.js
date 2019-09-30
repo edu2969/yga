@@ -92,8 +92,8 @@ Template.cuentaEdit.events({
                                     }
                                 }
                             } else {
-                                if(rolactual==6 && atributo!="bioid" && atributo!=prioridad) {
-                                    docSet["profile." + atributo] = valor;
+                                if(rolactual==6 && atributo!="bioid" && atributo!="prioridad") {
+                                    docSet.profile[atributo] = valor;
                                 }                                
                             }
                         }

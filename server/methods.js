@@ -88,18 +88,21 @@ Meteor.methods({
         Accounts.setPassword(userId, password);
     },
     ActualizarUsuario: function (userId, docSet, docUnset) {
+        console.log("ACTUALIZANDO USUARIO-->", userId, docSet, docUnset);
         var error = false;
         var doc = {};
         if (!userId) {
             var password = docSet.profile.password;
+            var email = docSet.email;
             delete docSet.profile.password;
             delete docSet.profile.repassword;
+            delete docSet.email;
             if (docSet.profile.role == 6) {
                 docSet.profile.appz = "panelTrabajador";
             }
             //console.log("Creando cuenta", { email: doc.$set.email, password: password, profile: doc.$set.profile });
             userId = Accounts.createUser({
-                email: doc.$set.email,
+                email: email,
                 password: password,
                 profile: docSet.profile
             });
