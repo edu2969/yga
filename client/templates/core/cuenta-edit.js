@@ -103,14 +103,27 @@ Template.cuentaEdit.events({
         });
 
         if (rolactual==6 && $("#checkbox-desvincular").is(":checked")) {
-            docSet["profile.role"] = 7;
+            if(!usuario._id) {
+                docSet.profile.role = 7;
+            } else {
+                docSet["profile.role"] = 7;
+            }            
         }
         if (rolactual==7 && $("#checkbox-reintegrar").is(":checked")) {        
-            docSet["profile.role"] = 6;
+            if(!usuario._id) {
+                docSet.profile.role = 6;
+            } else {
+                docSet["profile.role"] = 6;
+            }            
         }
         if (!usuario._id && docSet.profile.role) {
-            docSet["profile.role"] = rolactual;
+            if(!usuario._id) {
+                docSet.profile.role = rolactual;
+            } else {
+                docSet["profile.role"] = rolactual;
+            }            
         }
+        
         if (_.isEmpty(docSet.profile)) delete docSet.profile;
         if (_.isEmpty(docUnset.profile)) delete docUnset.profile;
 
@@ -120,13 +133,13 @@ Template.cuentaEdit.events({
                     Session.set("ImportMessages", {
                         danger: [{
                             item: resp
-          }]
+                        }]
                     });
                 } else {
                     Session.set("ImportMessages", {
                         success: [{
                             item: "Password actualizado correctamente"
-          }]
+                        }]
                     });
                 }
             });

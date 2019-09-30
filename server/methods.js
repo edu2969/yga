@@ -108,10 +108,9 @@ Meteor.methods({
             });
             // Debe ser agregado el equipo
             if (docSet.profile.role == 6 || docSet.profile.role == 7) {
+                var simen = Empresas.findOne({ identificador: "simen" });
                 Equipos.insert({
-                    empresaId: Equipos.findOne({
-                        usuarioId: userId
-                    }).empresaId,
+                    empresaId: simen._id,
                     usuarioId: userId,
                     rol: "Trabajador"
                 });
