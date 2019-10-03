@@ -448,9 +448,9 @@ Meteor.methods({
     
     ProcesarCambioHora(dia, mes, ano) {
         var ids = Asistencias.find({
-            dia: { $gte: dia },
-            mes: mes,
-            ano: ano 
+            day: { $gte: dia },
+            moth: mes,
+            year: ano 
         }).map(function(a) {
             return a._id
         });
