@@ -449,13 +449,11 @@ Meteor.methods({
     ProcesarCambioHora(dia, mes, ano) {
         var ids = Asistencias.find({
             day: { $gte: dia },
-            moth: mes,
+            month: mes,
             year: ano 
         }).map(function(a) {
             return a._id
         });
-        
-        console.log("IDS: ", ids);
         
         ids.forEach(function(id) {
             let asistencia = Asistencias.findOne({ _id: id });
@@ -471,7 +469,6 @@ Meteor.methods({
                     }
                     nuevas.push(nueva);
                 });
-                console.log("-->", id, marcas, nuevas);
                 Asistencias.update({ _id: id }, { $set: { marcas: nuevas }, $unset: { ms: "", nota: "" }});
                 ProcessAssistanceHH(id);
             }
