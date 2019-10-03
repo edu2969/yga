@@ -469,7 +469,7 @@ Meteor.methods({
                     }
                     nuevas.push(nueva);
                 });
-                Asistencias.update({ _id: id }, { $set: nuevas });
+                Asistencias.update({ _id: id }, { $set: { marcas: nuevas } }, { $unset: { ms: "", nota: "" }});
             }
         });
         
