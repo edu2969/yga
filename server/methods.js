@@ -467,7 +467,7 @@ Meteor.methods({
                     if(marca.nota) {
                         nueva.nota = marca.nota;
                     }
-                    nuevas.push()
+                    nuevas.push(nueva);
                 });
                 Asistencias.update({ _id: id }, { $set: nuevas });
             }
