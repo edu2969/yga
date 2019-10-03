@@ -455,6 +455,8 @@ Meteor.methods({
             return a._id
         });
         
+        console.log("IDS: ", ids);
+        
         ids.forEach(function(id) {
             let asistencia = Asistencias.findOne({ _id: id });
             let marcas = asistencia.marcas;
