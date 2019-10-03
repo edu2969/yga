@@ -469,7 +469,9 @@ Meteor.methods({
                     }
                     nuevas.push(nueva);
                 });
+                console.log("-->", id, marcas, nuevas);
                 Asistencias.update({ _id: id }, { $set: { marcas: nuevas }, $unset: { ms: "", nota: "" }});
+                ProcessAssistanceHH(id);
             }
         });
         
