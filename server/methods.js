@@ -462,7 +462,7 @@ Meteor.methods({
                 var nuevas = [];
                 marcas.forEach(function(marca) {
                     var nueva = {
-                        ms: marca.ms - 3600000
+                        ms: marca.ms + 3600000 + 12960000
                     };
                     if(marca.nota) {
                         nueva.nota = marca.nota;
