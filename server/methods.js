@@ -445,6 +445,36 @@ Meteor.methods({
     ObtenerPDF: function (identificador, tipo, parametros) {
         return FabricaPDFs(identificador, tipo, parametros);
     },
+    
+    ProcesarCambioHora(dia, mes, ano) {
+        var ids = Asistencias.find({
+            dia: { $gte: dia },
+            mes: mes,
+            ano: ano 
+        }).map(function(a) {
+            return a._id
+        });
+        
+        ids.forEach(function(id) {
+            let asistencia = Asistencias.findOne({ _id: id });
+            let marcas = asistencia.marcas;
+            if(marcas) {
+                var nuevas = [];
+                marcas.map(function(marca) {
+                    var nueva = {
+                        ms: marca.ms + 3600000
+                    };
+                    if(marca.nota) {
+                        nueva.nota = marca.nota;
+                    }
+                    nuevas.push()
+                });
+                Asistencias.update({ _id: id }, { $set: nuevas });
+            }
+        });
+        
+        console.log("CORREGIDO...");
+    }
 });
 
 FabricaPDFs = function (identificador, tipo, parametros) {
